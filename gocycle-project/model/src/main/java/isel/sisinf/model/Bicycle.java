@@ -1,6 +1,6 @@
 package isel.sisinf.model;
 
-public class Bicycle {
+public class Bicycle implements IBycicle {
     private String type;
     private Integer code;
     private Integer weight;
@@ -51,5 +51,30 @@ public class Bicycle {
 
     public String getGPS() {
         return GPS;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+    public void setModel(String model) {
+        this.model = model;
+    }
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+    public void setChangeSystem(Integer changeSystem) {
+        this.changeSystem = changeSystem;
+    }
+    public void setState(String state) {
+        this.state = state;
+    }
+    public void setGPS(String GPS) {
+        this.GPS = GPS;
     }
 }
