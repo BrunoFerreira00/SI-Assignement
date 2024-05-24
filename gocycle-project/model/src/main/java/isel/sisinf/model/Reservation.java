@@ -5,9 +5,9 @@ public class Reservation {
     private String initialDate;
     private String finalDate;
     private Integer bicycleCode;
-    private Integer price;
+    private String price;
 
-    public Reservation(Integer code, String initialDate, String finalDate, Integer bicycleCode, Integer price) {
+    public Reservation(Integer code, String initialDate, String finalDate, Integer bicycleCode, String price) {
         this.code = code;
         this.initialDate = initialDate;
         this.finalDate = finalDate;
@@ -31,8 +31,27 @@ public class Reservation {
         return bicycleCode;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
+    }
+
+    public void setCode(Integer code){
+        this.code = code;
+    }
+
+    public void setInitialDate(String initialDate){
+        this.initialDate = initialDate;
+    }
+
+    public void setFinalDate(String finalDate){
+        this.finalDate = finalDate;
+    }
+    public void setBicycleCode(Integer bicycleCode){
+        this.bicycleCode = bicycleCode;
+    }
+
+    public void setPrice(String price){
+        this.price = price;
     }
 
 }
