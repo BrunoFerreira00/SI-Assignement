@@ -48,4 +48,31 @@ public class Client {
         return citizenship;
     }
 
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setCC(String CC) {
+        this.CC = CC;
+    }
+
+    public void setPassport(String passport) {
+        this.passport = passport;
+    }
+
+    public void setCitizenship(String citizenship){
+        this.citizenship = citizenship;
+    }
 }

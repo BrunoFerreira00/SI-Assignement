@@ -23,4 +23,16 @@ public class GPS {
     public String getBatteryPercentage() {
         return batteryPercentage;
     }
+
+    public void setSerialNumber(String serialNumber){
+        this.serialNumber = serialNumber;
+    }
+
+    public void setLocation(String location){
+        this.location = location;
+    }
+
+    public void setBatteryPercentage(String batteryPercentage){
+        this.batteryPercentage = batteryPercentage;
+    }
 }
