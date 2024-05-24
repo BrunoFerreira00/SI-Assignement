@@ -1,5 +1,6 @@
 package isel.sisinf.model;
 
+
 public class Shop {
     private Integer code;
     private String manager;
@@ -41,4 +42,24 @@ public class Shop {
         return email;
     }
 
+    public void setCode(Integer code){
+        this.code = code;
+    }
+    public void setManager(String manager){
+        this.manager = manager;
+    }
+    public void setAddress(String address){
+        this.address = address;
+    }
+
+    public void setLocality(String locality){
+        this.locality = locality;
+    }
+    public void setPhoneNumber(String phoneNumber){
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
 }
