@@ -1,0 +1,20 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <persistence-unit name="SI-Project">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>isel.sisinf.model.Client</class>
+        <!-- Add other entity classes here -->
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://sisinfvlab2.dyn.fil.isel.pt:5432/postgres"/>
+            <property name="jakarta.persistence.jdbc.user" value="t43dg35"/>
+            <property name="jakarta.persistence.jdbc.password" value="NOTA20"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+        </properties>
+    </persistence-unit>
+</persistence>
