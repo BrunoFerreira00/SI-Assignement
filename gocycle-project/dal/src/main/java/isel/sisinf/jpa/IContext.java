@@ -1,7 +1,5 @@
 package isel.sisinf.jpa;
 
-import isel.sisinf.model.genericInterfaces.IClient;
-
 public interface IContext extends AutoCloseable {
 
     enum IsolationLevel {READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE };
@@ -14,7 +12,7 @@ public interface IContext extends AutoCloseable {
 
     IShopRepository getShops();
     IBycicleRepository getBycicles();
-    IEletricBicycleRepository getEletricBicycles();
+    IElectricBicycleRepository getElectricBicycles();
     IGPSRepository getGPSs();
     IClientRepository getClients();
 

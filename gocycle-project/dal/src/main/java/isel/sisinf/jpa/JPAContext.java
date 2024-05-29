@@ -21,7 +21,7 @@ public class JPAContext implements IContext  {
     private IShopRepository _shopRepository;
     private IGPSRepository _gpsRepository;
     private IBycicleRepository _bycicleRepository;
-    private IEletricBicycleRepository _eletricBicycleRepository;
+    private IElectricBicycleRepository _electricBicycleRepository;
     private IClientRepository _clientRepository;
     private IReservationRepository _reservationRepository;
     protected List helperQueryImpl(String jpql, Object... params)

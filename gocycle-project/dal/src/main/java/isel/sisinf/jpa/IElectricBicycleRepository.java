@@ -6,5 +6,5 @@ import isel.sisinf.model.IEletricBicycle;
 
 import java.util.Collection;
 
-public interface IEletricBicycleRepository extends IRepository<IEletricBicycle, Collection<IEletricBicycle>, Integer>, IDataMapper<IEletricBicycle> {
+public interface IElectricBicycleRepository extends IRepository<IEletricBicycle, Collection<IEletricBicycle>, Integer>, IDataMapper<IEletricBicycle> {
 }
