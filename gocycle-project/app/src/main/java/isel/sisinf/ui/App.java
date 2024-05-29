@@ -23,6 +23,9 @@ SOFTWARE.
 */
 package isel.sisinf.ui;
 
+import isel.sisinf.jpa.JPAContext;
+import isel.sisinf.model.Client;
+
 import java.util.Scanner;
 import java.util.HashMap;
 
@@ -142,9 +145,21 @@ class UI
     */
 
     private static final int TAB_SIZE = 24;
-
+    JPAContext ctx = new JPAContext();
     private void createCostumer() {
-        // TODO
+        ctx.beginTransaction();
+        Client client = new Client();
+        client.setId(1);
+        client.setName("Nuno");
+        client.setEmail("sadasdas@asdasdas.com");
+        client.setAddress("Rua das flores");
+        client.setPhoneNumber("123456789");
+        client.setIdentDoc("123456789");
+        client.setAtrdisc("E");
+        client.setCitizenship("Portuguese");
+        System.out.println("Client created: " + client.getName() + " " + client.getEmail() + " " + client.getAddress() + " " + client.getPhoneNumber() + " " + client.getIdentDoc() + " " + client.getAtrdisc() + " " + client.getCitizenship());
+        ctx.getClients().create(client);
+        ctx.commit();
         System.out.println("createCostumer()");
     }
   
@@ -181,7 +196,11 @@ class UI
     }
     private void about()
     {
-        // TODO: Add your Group ID & member names
+        System.out.println("About");
+        System.out.println("Developers:");
+        System.out.println("Nuno Aguiar - 49512");
+        System.out.println("Bruno Ferreira - 50499");
+        System.out.println("Constança Costa - 50541");
         System.out.println("DAL version:"+ isel.sisinf.jpa.Dal.version());
         System.out.println("Core version:"+ isel.sisinf.model.Core.version());
         

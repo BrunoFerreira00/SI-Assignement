@@ -1,12 +1,12 @@
 package isel.sisinf.jpa;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Query;
+import isel.sisinf.model.Client;
+import isel.sisinf.model.genericInterfaces.IClient;
+import jakarta.persistence.*;
 import org.eclipse.persistence.sessions.DatabaseLogin;
 import org.eclipse.persistence.sessions.Session;
 
+import java.util.Collection;
 import java.util.List;
 
 public class JPAContext implements IContext  {
@@ -118,6 +118,12 @@ public class JPAContext implements IContext  {
     }
 
     @Override
+    public IClientRepository getClients() {
+        return _clientRepository;
+    }
+
+
+    @Override
     public void close() throws Exception {
 
         if(_tx != null)
@@ -125,6 +131,49 @@ public class JPAContext implements IContext  {
         _em.close();
         _emf.close();
     }
+
+    protected class ClientRepository implements IClientRepository {
+
+        @Override
+        public Client create(Client entity) {
+            return (Client) helperCreateImpl(entity);
+        }
+
+        @Override
+        public Client update(Client entity) {
+            return null;
+        }
+
+        @Override
+        public Client delete(Client entity) {
+            return null;
+        }
+
+        @Override
+        public IClient findByKey(Integer key) {
+            return null;
+        }
+
+        @Override
+        public Collection<IClient> find(String jpql, Object... params) {
+            return null;
+        }
+    }
+
+    public JPAContext() {
+        this("SI-Project");
+    }
+
+    public JPAContext(String persistentCtx)
+    {
+        super();
+
+        this._emf = Persistence.createEntityManagerFactory(persistentCtx);
+        this._em = _emf.createEntityManager();
+        this._clientRepository = new ClientRepository();
+
+    }
+
 
 
 

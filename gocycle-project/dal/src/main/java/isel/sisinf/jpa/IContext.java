@@ -10,12 +10,7 @@ public interface IContext extends AutoCloseable {
     void clear();
     void persist(Object entity);
 
-    IShopRepository getShops();
-    IBycicleRepository getBycicles();
-    IElectricBicycleRepository getElectricBicycles();
-    IGPSRepository getGPSs();
     IClientRepository getClients();
-
 
 
 

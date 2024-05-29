@@ -1,15 +1,22 @@
 package isel.sisinf.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity(name = "pessoa")
 public class Client {
-    private Integer code;
-    private String name;
-    private String address;
-    private String phoneNumber;
-    private String CC;
-    private String passport;
-    private String citizenship;
+    @Id
+    private Integer id;
+    private String nome;
+    private String morada;
+    private String email;
+    private String telefone;
+    private String noident;
+    private String nacionalidade;
 
+    private String atrdisc;
 
+/*
     public Client(Integer code, String name, String address, String phoneNumber, String CC, String passport, String citizenship) {
         this.code = code;
         this.name = name;
@@ -19,60 +26,65 @@ public class Client {
         this.passport = passport;
         this.citizenship = citizenship;
     }
-
-    public Integer getCode() {
-        return code;
+*/
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
-        return name;
+        return nome;
     }
 
+    public String getEmail() {return email;}
+
     public String getAddress() {
-        return address;
+        return morada;
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return telefone;
     }
 
-    public String getCC() {
-        return CC;
+    public String getIdentDoc() {
+        return noident;
     }
 
-    public String getPassport() {
-        return passport;
-    }
+    public String getAtrdisc() { return atrdisc; }
+
 
     public String getCitizenship() {
-        return citizenship;
+        return nacionalidade;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nome = name;
     }
 
+    public void setEmail(String email) {this.email = email;}
+
     public void setAddress(String address) {
-        this.address = address;
+        this.morada = address;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.telefone = phoneNumber;
     }
 
-    public void setCC(String CC) {
-        this.CC = CC;
+    public void setIdentDoc(String identDoc) {
+        this.noident = identDoc;
     }
 
-    public void setPassport(String passport) {
-        this.passport = passport;
+    public void setAtrdisc(String atrdisc) { this.atrdisc = atrdisc; }
+
+    public void setCitizenship(String citizenship) {
+        this.nacionalidade = citizenship;
     }
 
-    public void setCitizenship(String citizenship){
-        this.citizenship = citizenship;
-    }
+
+
+
 }

@@ -85,3 +85,15 @@ create table CLIENTERESERVA (
 );
 
 COMMIT;
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to t43dg35;
+GRANT ALL PRIVILEGES ON TABLE PESSOA TO t43dg35;
+alter table pessoa owner to t43dg35;
+
+drop table CLIENTERESERVA;
+drop table RESERVA;
+drop table ELECTRICA;
+drop table BICICLETA;
+drop table LOJA;
+drop table PESSOA;
+drop table GPS;
