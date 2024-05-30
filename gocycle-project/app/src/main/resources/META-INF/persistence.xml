@@ -6,6 +6,11 @@
     <persistence-unit name="SI-Project">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>isel.sisinf.model.Client</class>
+        <class>isel.sisinf.model.Bicycle</class>
+        <class>isel.sisinf.model.EletricBicycle</class>
+        <class>isel.sisinf.model.GPS</class>
+        <class>isel.sisinf.model.Reservation</class>
+        <class>isel.sisinf.model.Shop</class>
         <!-- Add other entity classes here -->
 
         <properties>

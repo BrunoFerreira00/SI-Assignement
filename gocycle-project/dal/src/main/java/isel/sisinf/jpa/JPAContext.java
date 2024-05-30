@@ -1,7 +1,7 @@
 package isel.sisinf.jpa;
 
-import isel.sisinf.model.Client;
-import isel.sisinf.model.genericInterfaces.IClient;
+import isel.sisinf.model.*;
+import isel.sisinf.model.genericInterfaces.*;
 import jakarta.persistence.*;
 import org.eclipse.persistence.sessions.DatabaseLogin;
 import org.eclipse.persistence.sessions.Session;

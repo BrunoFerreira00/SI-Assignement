@@ -1,12 +1,17 @@
 package isel.sisinf.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity(name = "reserva")
 public class Reservation {
+    @Id
     private Integer code;
     private String initialDate;
     private String finalDate;
     private Integer bicycleCode;
     private String price;
-
+/*
     public Reservation(Integer code, String initialDate, String finalDate, Integer bicycleCode, String price) {
         this.code = code;
         this.initialDate = initialDate;
@@ -14,6 +19,8 @@ public class Reservation {
         this.bicycleCode = bicycleCode;
         this.price = price;
     }
+
+ */
 
     public Integer getCode() {
         return code;

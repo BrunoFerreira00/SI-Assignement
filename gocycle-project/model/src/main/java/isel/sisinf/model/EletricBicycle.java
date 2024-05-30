@@ -1,7 +1,12 @@
 package isel.sisinf.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity(name = "eletrica")
 public class EletricBicycle implements IEletricBicycle {
     private String type;
+    @Id
     private Integer code;
     private Integer weight;
     private String model;
@@ -12,7 +17,7 @@ public class EletricBicycle implements IEletricBicycle {
     private Integer autonomy;
     private Integer maxSpeed;
 
-
+/*
     public EletricBicycle(Integer autonomy, Integer maxSpeed,String type, Integer code, Integer weight, String model, String brand, Integer changeSystem, String state, String GPS) {
         this.autonomy = autonomy;
         this.maxSpeed = maxSpeed;
@@ -25,6 +30,9 @@ public class EletricBicycle implements IEletricBicycle {
         this.state = state;
         this.GPS = GPS;
     }
+
+
+ */
 
     public Integer getAutonomy() {
         return autonomy;

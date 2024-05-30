@@ -1,7 +1,12 @@
 package isel.sisinf.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity(name = "bicicleta")
 public class Bicycle implements IBycicle {
     private String type;
+    @Id
     private Integer code;
     private Integer weight;
     private String model;
@@ -10,6 +15,7 @@ public class Bicycle implements IBycicle {
     private String state; // Can only be {livre, ocupado, reserva, em manutenção}
     private String GPS;
 
+    /*
     public Bicycle(String type, Integer code, Integer weight, String model, String brand, Integer changeSystem, String state, String GPS) {
         this.type = type;
         this.code = code;
@@ -20,7 +26,7 @@ public class Bicycle implements IBycicle {
         this.state = state;
         this.GPS = GPS;
     }
-
+     */
     public String getType() {
         return type;
     }
