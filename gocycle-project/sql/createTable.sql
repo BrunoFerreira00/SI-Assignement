@@ -89,6 +89,7 @@ COMMIT;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to t43dg35;
 GRANT ALL PRIVILEGES ON TABLE PESSOA TO t43dg35;
 alter table pessoa owner to t43dg35;
+\du
 
 drop table CLIENTERESERVA;
 drop table RESERVA;

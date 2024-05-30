@@ -9,7 +9,7 @@
         <!-- Add other entity classes here -->
 
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://sisinfvlab2.dyn.fil.isel.pt:5432/postgres"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://sisinfvlab2.dyn.fil.isel.pt:5432/t43dg35"/>
             <property name="jakarta.persistence.jdbc.user" value="t43dg35"/>
             <property name="jakarta.persistence.jdbc.password" value="NOTA20"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
