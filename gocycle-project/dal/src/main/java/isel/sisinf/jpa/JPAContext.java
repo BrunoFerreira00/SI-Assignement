@@ -1,7 +1,6 @@
 package isel.sisinf.jpa;
 
 import isel.sisinf.model.*;
-import isel.sisinf.model.genericInterfaces.*;
 import jakarta.persistence.*;
 import org.eclipse.persistence.sessions.DatabaseLogin;
 import org.eclipse.persistence.sessions.Session;
@@ -122,6 +121,11 @@ public class JPAContext implements IContext  {
         return _clientRepository;
     }
 
+    @Override
+    public IBycicleRepository getBycicles() {
+        return _bycicleRepository;
+    }
+
 
     @Override
     public void close() throws Exception {
@@ -150,13 +154,64 @@ public class JPAContext implements IContext  {
         }
 
         @Override
-        public IClient findByKey(Integer key) {
+        public Client findByKey(Integer key) {
+            return _em.find(Client.class, key);
+        }
+
+        @Override
+        public Collection<Client> find(String jpql, Object... params) {
+            return (Collection<Client>) helperQueryImpl(jpql, params);
+        }
+
+        @Override
+        public Client findClientWithBiggestId() {
+            String jpql = "SELECT c FROM pessoa c ORDER BY c.id DESC";
+            List<Client> clients = (List<Client>) find(jpql);
+            return clients.isEmpty() ? null : clients.get(0);
+        }
+    }
+
+    protected class BycicleRepository implements IBycicleRepository {
+
+        @Override
+        public Bycicle create(Bycicle entity) {
+            return (Bycicle) helperCreateImpl(entity);
+        }
+
+        @Override
+        public Bycicle update(Bycicle entity) {
             return null;
         }
 
         @Override
-        public Collection<IClient> find(String jpql, Object... params) {
+        public Bycicle delete(Bycicle entity) {
             return null;
+        }
+
+        @Override
+        public Bycicle findByKey(Integer key) {
+            return _em.find(Bycicle.class, key);
+        }
+
+        @Override
+        public Collection<Bycicle> find(String jpql, Object... params) {
+            return (Collection<Bycicle>) helperQueryImpl(jpql, params);
+        }
+
+        @Override
+        public List<Bycicle> checkAvailability() {
+            try {
+                _em.getTransaction().begin();
+                Query q = _em.createNativeQuery("SELECT * FROM verifybyciclestate()");
+                return q.getResultList();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            } finally {
+                _em.getTransaction().commit();
+            }
+
+
         }
     }
 
@@ -171,6 +226,7 @@ public class JPAContext implements IContext  {
         this._emf = Persistence.createEntityManagerFactory(persistentCtx);
         this._em = _emf.createEntityManager();
         this._clientRepository = new ClientRepository();
+        this._bycicleRepository = new BycicleRepository();
 
     }
 

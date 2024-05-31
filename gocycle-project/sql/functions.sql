@@ -1,0 +1,7 @@
+
+
+CREATE OR REPLACE FUNCTION verifyBycicleState() RETURNS TABLE()  AS $$
+BEGIN
+    RETURN (SELECT * FROM BICICLETA WHERE estado = 'livre');
+END;
+$$ LANGUAGE plpgsql;

@@ -42,61 +42,61 @@ public class EletricBicycle implements IEletricBicycle {
         return maxSpeed;
     }
 
-    public String getType() {
+    public String getAtrdisc() {
         return type;
     }
 
-    public Integer getCode() {
+    public Integer getId_bicicleta() {
         return code;
     }
 
-    public Integer getWeight() {
+    public Integer getPeso() {
         return weight;
     }
 
-    public String getModel() {
+    public String getModelo() {
         return model;
     }
 
-    public String getBrand() {
+    public String getMarca() {
         return brand;
     }
 
-    public Integer getChangeSystem() {
+    public Integer getMudanca() {
         return changeSystem;
     }
 
-    public String getState() {
+    public String getEstado() {
         return state;
     }
 
-    public String getGPS() {
+    public String getGps() {
         return GPS;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setAtrdisc(String atrdisc) {
+        this.type = atrdisc;
     }
-    public void setCode(Integer code) {
-        this.code = code;
+    public void setId_bicicleta(Integer id_bicicleta) {
+        this.code = id_bicicleta;
     }
-    public void setWeight(Integer weight) {
-        this.weight = weight;
+    public void setPeso(Integer peso) {
+        this.weight = peso;
     }
-    public void setModel(String model) {
-        this.model = model;
+    public void setModelo(String modelo) {
+        this.model = modelo;
     }
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setMarca(String marca) {
+        this.brand = marca;
     }
-    public void setChangeSystem(Integer changeSystem) {
-        this.changeSystem = changeSystem;
+    public void setMudanca(Integer mudanca) {
+        this.changeSystem = mudanca;
     }
-    public void setState(String state) {
-        this.state = state;
+    public void setEstado(String estado) {
+        this.state = estado;
     }
-    public void setGPS(String GPS) {
-        this.GPS = GPS;
+    public void setGps(String gps) {
+        this.GPS = gps;
     }
     public void setAutonomy(Integer autonomy){
         this.autonomy = autonomy;

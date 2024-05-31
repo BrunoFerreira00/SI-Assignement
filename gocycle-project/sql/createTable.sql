@@ -1,7 +1,7 @@
 BEGIN;
 
--- Criação da tabela GPS
-CREATE TABLE GPS (
+-- Criação da tabela gps
+CREATE TABLE gps (
     noserie serial PRIMARY KEY,
     latitude NUMERIC(6,4) NOT NULL,
     longitude NUMERIC(6,4) NOT NULL,
@@ -45,7 +45,7 @@ create table BICICLETA (
     atrdisc CHAR(1) check (atrdisc in ('C', 'E')), -- 'C' para Clássica, 'E' para Elétrica
     gps INTEGER,
     loja INTEGER,
-    foreign key (gps) references GPS(noserie),
+    foreign key (gps) references gps(noserie),
     foreign key (loja) references LOJA(codigo)
 
 );
@@ -86,15 +86,7 @@ create table CLIENTERESERVA (
 
 COMMIT;
 
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to t43dg35;
-GRANT ALL PRIVILEGES ON TABLE PESSOA TO t43dg35;
-alter table pessoa owner to t43dg35;
-\du
-
-drop table CLIENTERESERVA;
-drop table RESERVA;
-drop table ELECTRICA;
-drop table BICICLETA;
-drop table LOJA;
-drop table PESSOA;
-drop table GPS;
+INSERT INTO gps (latitude, longitude, bateria) VALUES (41.1579, -8.6291, 100);
+INSERT INTO LOJA (codigo, email, endereco, localidade, notelefone, gestor) VALUES (1, 'loja1@gmail.com', 'Rua do Amial, 123', 'Porto', '912345678', 1);
+INSERT INTO BICICLETA (peso, raio, modelo, marca, mudanca, estado, atrdisc, gps, loja) VALUES (10.5, 26, 'BTT', 'Orbea', 18, 'livre', 'C', 1, 1);
+INSERT INTO BICICLETA (peso, raio, modelo, marca, mudanca, estado, atrdisc, gps, loja) VALUES (12.5, 28, 'Estrada', 'Specialized', 24, 'livre', 'E', 1, 1);

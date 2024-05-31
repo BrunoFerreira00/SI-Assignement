@@ -147,31 +147,79 @@ class UI
     private static final int TAB_SIZE = 24;
     JPAContext ctx = new JPAContext();
     private void createCostumer() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter client name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter client email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter client address: ");
+        String address = scanner.nextLine();
+
+        System.out.print("Enter client phone number: ");
+        String phoneNumber = scanner.nextLine();
+
+        System.out.print("Enter client identification document number: ");
+        String identDoc = scanner.nextLine();
+
+        System.out.print("Enter client atrdisc: ");
+        String atrdisc = scanner.nextLine();
+
+        System.out.print("Enter client citizenship: ");
+        String citizenship = scanner.nextLine();
         ctx.beginTransaction();
+        // get client with biggest id
+        int lastId = ctx.getClients().findClientWithBiggestId() == null ? 0 : ctx.getClients().findClientWithBiggestId().getId();
         Client client = new Client();
-        client.setId(1);
-        client.setName("Nuno");
-        client.setEmail("sadasdas@asdasdas.com");
-        client.setAddress("Rua das flores");
-        client.setPhoneNumber("123456789");
-        client.setIdentDoc("123456789");
-        client.setAtrdisc("E");
-        client.setCitizenship("Portuguese");
+        client.setId(lastId + 1);
+        client.setName(name);
+        client.setEmail(email);
+        client.setAddress(address);
+        client.setPhoneNumber(phoneNumber);
+        client.setIdentDoc(identDoc);
+        client.setAtrdisc(atrdisc);
+        client.setCitizenship(citizenship);
+
         System.out.println("Client created: " + client.getName() + " " + client.getEmail() + " " + client.getAddress() + " " + client.getPhoneNumber() + " " + client.getIdentDoc() + " " + client.getAtrdisc() + " " + client.getCitizenship());
+
+
         ctx.getClients().create(client);
         ctx.commit();
-        System.out.println("createCostumer()");
+
+        System.out.println("createCustomer()");
     }
   
     private void listExistingBikes()
     {
-        // TODO
+        ctx.getBycicles().find("SELECT b FROM bicicleta b").forEach(b -> {
+            System.out.println("Type: " + b.getAtrdisc());
+            System.out.println("Code: " + b.getId_bicicleta());
+            System.out.println("Weight: " + b.getPeso());
+            System.out.println("Model: " + b.getModelo());
+            System.out.println("Brand: " + b.getMarca());
+            System.out.println("Change System: " + b.getMudanca());
+            System.out.println("State: " + b.getEstado());
+            System.out.println("GPS: " + b.getGps());
+            System.out.println();
+        });
         System.out.println("listExistingBikes()");
     }
 
     private void checkBikeAvailability()
     {
-        // TODO
+        ctx.getBycicles().checkAvailability().forEach(b -> {
+            System.out.println("Type: " + b.getAtrdisc());
+            System.out.println("Code: " + b.getId_bicicleta());
+            System.out.println("Weight: " + b.getPeso());
+            System.out.println("Model: " + b.getModelo());
+            System.out.println("Brand: " + b.getMarca());
+            System.out.println("Change System: " + b.getMudanca());
+            System.out.println("State: " + b.getEstado());
+            System.out.println("GPS: " + b.getGps());
+            System.out.println();
+        });
         System.out.println("checkBikeAvailability()");
 
     }

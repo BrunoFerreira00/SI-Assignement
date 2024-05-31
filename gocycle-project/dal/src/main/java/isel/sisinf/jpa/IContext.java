@@ -11,6 +11,7 @@ public interface IContext extends AutoCloseable {
     void persist(Object entity);
 
     IClientRepository getClients();
+    IBycicleRepository getBycicles();
 
 
 

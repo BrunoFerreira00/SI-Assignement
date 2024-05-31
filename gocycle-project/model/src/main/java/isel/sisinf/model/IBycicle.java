@@ -1,23 +1,23 @@
 package isel.sisinf.model;
 
 public interface IBycicle {
-    String getType();
-    Integer getCode();
-    Integer getWeight();
-    String getModel();
-    String getBrand();
-    Integer getChangeSystem();
-    String getState();
-    String getGPS();
+    String getAtrdisc();
+    Integer getId_bicicleta();
+    Integer getPeso();
+    String getModelo();
+    String getMarca();
+    Integer getMudanca();
+    String getEstado();
+    String getGps();
 
-    void setType(String type);
-    void setCode(Integer code);
-    void setWeight(Integer weight);
-    void setModel(String model);
-    void setBrand(String brand);
-    void setChangeSystem(Integer changeSystem);
-    void setState(String state);
-    void setGPS(String GPS);
+    void setAtrdisc(String atrdisc);
+    void setId_bicicleta(Integer id_bicicleta);
+    void setPeso(Integer peso);
+    void setModelo(String modelo);
+    void setMarca(String marca);
+    void setMudanca(Integer mudanca);
+    void setEstado(String estado);
+    void setGps(String gps);
 
 
 }
