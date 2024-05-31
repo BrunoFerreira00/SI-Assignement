@@ -208,9 +208,26 @@ class UI
         System.out.println("listExistingBikes()");
     }
 
-    private void checkBikeAvailability()
-    {
-       System.out.println(ctx.getBycicles().checkAvailability(Timestamp.valueOf( "2024-01-01 00:00:00"), 3));
+    private void checkBikeAvailability() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter year: ");
+        int year = scanner.nextInt();
+        System.out.print("Enter month: ");
+        int month = scanner.nextInt();
+        System.out.print("Enter day: ");
+        int day = scanner.nextInt();
+        System.out.print("Enter hour: ");
+        int hour = scanner.nextInt();
+        System.out.print("Enter minute: ");
+        int minute = scanner.nextInt();
+        System.out.print("Enter second: ");
+        int second = scanner.nextInt();
+        String timestamp = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+
+        System.out.print("Enter bike id: ");
+        int bikeId = scanner.nextInt();
+
+       System.out.println(ctx.getBycicles().checkAvailability(Timestamp.valueOf(timestamp), bikeId));
         System.out.println("checkBikeAvailability()");
 
     }
