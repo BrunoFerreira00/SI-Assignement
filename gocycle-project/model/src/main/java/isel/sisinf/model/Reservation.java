@@ -1,16 +1,21 @@
 package isel.sisinf.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 @Entity(name = "reserva")
 public class Reservation {
     @Id
     private Integer noreserva;
     private Integer loja;
-    private String dtinicio;
-    private String dtfim;
-    private String valor;
+    private Timestamp dtinicio;
+    private Timestamp dtfim;
+    @Column(name = "valor", precision = 5, scale = 2)
+    private BigDecimal valor;
     private Integer bicicleta;
 
 /*
@@ -29,11 +34,11 @@ public class Reservation {
     }
     public Integer getShop(){return loja;}
 
-    public String getInitialDate() {
+    public Timestamp getInitialDate() {
         return dtinicio;
     }
 
-    public String getFinalDate() {
+    public Timestamp getFinalDate() {
         return dtfim;
     }
 
@@ -41,24 +46,24 @@ public class Reservation {
         return bicicleta;
     }
 
-    public String getPrice() {return valor;}
+    public BigDecimal getPrice() {return valor;}
 
     public void setId(Integer noreserva){this.noreserva = noreserva;}
 
     public void setShop(Integer loja){this.loja = loja;}
 
-    public void setInitialDate(String dtinicio){
+    public void setInitialDate(Timestamp dtinicio){
         this.dtinicio = dtinicio;
     }
 
-    public void setFinalDate(String dtfim){
+    public void setFinalDate(Timestamp dtfim){
         this.dtfim = dtfim;
     }
     public void setBicycleCode(Integer bicicleta){
         this.bicicleta = bicicleta;
     }
 
-    public void setPrice(String valor){
+    public void setPrice(BigDecimal valor){
         this.valor = valor;
     }
 

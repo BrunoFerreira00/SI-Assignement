@@ -6,7 +6,9 @@ import isel.sisinf.model.genericInterfaces.IReservation;
 import jakarta.persistence.*;
 import org.eclipse.persistence.sessions.DatabaseLogin;
 import org.eclipse.persistence.sessions.Session;
+import org.postgresql.core.NativeQuery;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
@@ -26,6 +28,7 @@ public class JPAContext implements IContext  {
     private IElectricBicycleRepository _electricBicycleRepository;
     private IClientRepository _clientRepository;
     private IReservationRepository _reservationRepository;
+
 
     private IClientBookingRepository _clientBookingRepository;
     protected List helperQueryImpl(String jpql, Object... params)
@@ -136,6 +139,10 @@ public class JPAContext implements IContext  {
         return _reservationRepository;
     }
 
+    @Override
+    public IClientBookingRepository getClientBookings() {
+        return _clientBookingRepository;
+    }
 
     @Override
     public void close() throws Exception {
@@ -229,7 +236,38 @@ public class JPAContext implements IContext  {
 
     protected class ReservationRepository implements IReservationRepository{
         @Override
-        public Reservation create(Reservation entity){return (Reservation) helperCreateImpl(entity);}
+        public Reservation create(Reservation entity) {
+            try {
+
+
+                _em.getTransaction().begin();
+                Query query = _em.createNativeQuery("call MakeReservation(?1,?2,?3,?4,?5)");
+                // Register the parameters with their positions and types
+                /*query.registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN);
+                query.registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN);
+                query.registerStoredProcedureParameter(3, Timestamp.class, ParameterMode.IN);
+                query.registerStoredProcedureParameter(4, Timestamp.class, ParameterMode.IN);
+                query.registerStoredProcedureParameter(5, Double.class, ParameterMode.IN);*/
+
+                // Set the parameter values by position
+                query.setParameter(1, entity.getShop());
+                query.setParameter(2, entity.getBicycleCode());
+                query.setParameter(3, entity.getInitialDate());
+                query.setParameter(4, entity.getFinalDate());
+                query.setParameter(5, entity.getPrice());
+
+                // Execute the stored procedure
+                query.executeUpdate();
+                _em.getTransaction().commit();
+                return entity;
+            } catch (Exception e) {
+                // Log the exception (consider using a logging framework)
+                System.err.println("Error during reservation creation: " + e.getMessage());
+                e.printStackTrace();
+                throw new RuntimeException("Reservation creation failed", e);
+            }
+        }
+
 
         @Override
         public Reservation update(Reservation entity) {
@@ -250,6 +288,14 @@ public class JPAContext implements IContext  {
         public Collection<Reservation> find(String jpql, Object... params) {
             return (Collection<Reservation>) helperQueryImpl(jpql,params);
         }
+        @Override
+        public Reservation findReservationWithBiggestId() {
+            String jpql = "SELECT r FROM reserva r ORDER BY r.noreserva DESC";
+            List<Reservation> reservations = (List<Reservation>) find(jpql);
+            return reservations.isEmpty() ? null : reservations.get(0);
+        }
+
+
     }
 
     protected class ClientReservationRepository implements IClientBookingRepository {
@@ -292,7 +338,7 @@ public class JPAContext implements IContext  {
         this._clientRepository = new ClientRepository();
         this._bycicleRepository = new BycicleRepository();
         this._reservationRepository = new ReservationRepository();
-        this._clientBookingRepository = new ClientBookingRepository();
+        this._clientBookingRepository = new ClientReservationRepository();
 
     }
 

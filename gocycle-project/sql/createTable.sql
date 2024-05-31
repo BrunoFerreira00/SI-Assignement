@@ -67,7 +67,7 @@ CREATE TABLE RESERVA (
     loja INTEGER,
     dtinicio TIMESTAMP NOT NULL,
     dtfim TIMESTAMP CHECK (dtfim > dtinicio),
-    valor NUMERIC(4,2),
+    valor NUMERIC(5,2),
     bicicleta INTEGER,
     PRIMARY KEY (noreserva, loja),
     FOREIGN KEY (loja) REFERENCES LOJA(codigo),

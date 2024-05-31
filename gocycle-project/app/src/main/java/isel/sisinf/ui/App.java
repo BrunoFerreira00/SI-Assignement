@@ -25,7 +25,10 @@ package isel.sisinf.ui;
 
 import isel.sisinf.jpa.JPAContext;
 import isel.sisinf.model.Client;
+import isel.sisinf.model.ClientBooking;
+import isel.sisinf.model.Reservation;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Scanner;
 import java.util.HashMap;
@@ -246,11 +249,82 @@ class UI
         System.out.println("obtainBookings()");
     }
 
-    private void makeBooking()
-    {
-        // TODO
+    private void makeBooking() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter shop ID: ");
+        int shopId = scanner.nextInt();
+
+        System.out.print("Enter year for initial date: ");
+        int initYear = scanner.nextInt();
+        System.out.print("Enter month for initial date: ");
+        int initMonth = scanner.nextInt();
+        System.out.print("Enter day for initial date: ");
+        int initDay = scanner.nextInt();
+        System.out.print("Enter hour for initial date: ");
+        int initHour = scanner.nextInt();
+        System.out.print("Enter minute for initial date: ");
+        int initMinute = scanner.nextInt();
+        System.out.print("Enter second for initial date: ");
+        int initSecond = scanner.nextInt();
+        String initialDateStr = initYear + "-" + initMonth + "-" + initDay + " " + initHour + ":" + initMinute + ":" + initSecond;
+        Timestamp initialDate = Timestamp.valueOf(initialDateStr);
+
+        System.out.print("Enter year for final date: ");
+        int finalYear = scanner.nextInt();
+        System.out.print("Enter month for final date: ");
+        int finalMonth = scanner.nextInt();
+        System.out.print("Enter day for final date: ");
+        int finalDay = scanner.nextInt();
+        System.out.print("Enter hour for final date: ");
+        int finalHour = scanner.nextInt();
+        System.out.print("Enter minute for final date: ");
+        int finalMinute = scanner.nextInt();
+        System.out.print("Enter second for final date: ");
+        int finalSecond = scanner.nextInt();
+        String finalDateStr = finalYear + "-" + finalMonth + "-" + finalDay + " " + finalHour + ":" + finalMinute + ":" + finalSecond;
+        Timestamp finalDate = Timestamp.valueOf(finalDateStr);
+
+        System.out.print("Enter reservation value: ");
+        double value = scanner.nextDouble();
+
+        System.out.print("Enter bicycle ID: ");
+        int bicycleId = scanner.nextInt();
+
+        System.out.print("Enter client ID: ");
+        int clientId = scanner.nextInt();
+
+        // Ensure that the final date is after the initial date
+        if (finalDate.before(initialDate)) {
+            System.out.println("Final date must be after initial date.");
+            return;
+        }
+
+
+
+        // Get the reservation with the highest ID
+       int lastId = ctx.getBookings().findReservationWithBiggestId() == null ? 0 : ctx.getBookings().findReservationWithBiggestId().getId();
+        Reservation reservation = new Reservation();
+
+        reservation.setShop(shopId);
+        reservation.setInitialDate(initialDate);
+        reservation.setFinalDate(finalDate);
+        reservation.setPrice(BigDecimal.valueOf(value));
+        reservation.setBicycleCode(bicycleId);
+
+        ctx.getBookings().create(reservation);
+
+        // Create the client-reservation relationship
+        ClientBooking clientReservation = new ClientBooking();
+        clientReservation.setClientCode(clientId);
+        clientReservation.setBookingCode(lastId + 1);
+        clientReservation.setShopCode(shopId);
+
+        ctx.getClientBookings().create(clientReservation);
+
+
+        System.out.println("Reservation created successfully!");
         System.out.println("makeBooking()");
-        
     }
 
     private void cancelBooking()

@@ -1,5 +1,7 @@
 package isel.sisinf.jpa;
 
+import isel.sisinf.model.genericInterfaces.IClientBooking;
+
 public interface IContext extends AutoCloseable {
 
     enum IsolationLevel {READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE };
@@ -14,6 +16,10 @@ public interface IContext extends AutoCloseable {
     IBycicleRepository getBycicles();
 
     IReservationRepository getBookings();
+
+    IClientBookingRepository getClientBookings();
+
+
 
 
 

@@ -6,5 +6,5 @@ import isel.sisinf.model.ClientBooking;
 
 import java.util.Collection;
 
-public interface IClientBookingRepository extends IRepository<ClientBooking, Collection<ClientBooking>,Integer>,IClientDataMapper{
+public interface IClientBookingRepository extends IRepository<ClientBooking, Collection<ClientBooking>,Integer>,IClientBookingMapper{
 }

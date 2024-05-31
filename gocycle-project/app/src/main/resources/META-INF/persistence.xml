@@ -11,7 +11,7 @@
         <class>isel.sisinf.model.GPS</class>
         <class>isel.sisinf.model.Reservation</class>
         <class>isel.sisinf.model.Shop</class>
-
+        <class>isel.sisinf.model.ClientBooking</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://sisinfvlab2.dyn.fil.isel.pt:5432/t43dg35"/>
             <property name="jakarta.persistence.jdbc.user" value="t43dg35"/>
