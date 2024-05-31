@@ -90,3 +90,4 @@ INSERT INTO gps (latitude, longitude, bateria) VALUES (41.1579, -8.6291, 100);
 INSERT INTO LOJA (codigo, email, endereco, localidade, notelefone, gestor) VALUES (1, 'loja1@gmail.com', 'Rua do Amial, 123', 'Porto', '912345678', 1);
 INSERT INTO BICICLETA (peso, raio, modelo, marca, mudanca, estado, atrdisc, gps, loja) VALUES (10.5, 26, 'BTT', 'Orbea', 18, 'livre', 'C', 1, 1);
 INSERT INTO BICICLETA (peso, raio, modelo, marca, mudanca, estado, atrdisc, gps, loja) VALUES (12.5, 28, 'Estrada', 'Specialized', 24, 'livre', 'E', 1, 1);
+INSERT INTO RESERVA (loja, dtinicio, dtfim, valor, bicicleta) VALUES (1, '2021-06-01 10:00:00', '2021-06-01 12:00:00', 5.0, 3);

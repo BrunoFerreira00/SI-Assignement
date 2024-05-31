@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import org.eclipse.persistence.sessions.DatabaseLogin;
 import org.eclipse.persistence.sessions.Session;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 
@@ -205,11 +206,13 @@ public class JPAContext implements IContext  {
         }
 
         @Override
-        public List<Bycicle> checkAvailability() {
+        public Boolean checkAvailability(Timestamp date, Integer id) {
             try {
                 _em.getTransaction().begin();
-                Query q = _em.createNativeQuery("SELECT * FROM verifybyciclestate()");
-                return q.getResultList();
+                Query q = _em.createNativeQuery("SELECT * FROM verifysinglebyciclestate(?, ?)");
+                q.setParameter(1, date);
+                q.setParameter(2, id);
+                return(Boolean) q.getSingleResult();
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -258,6 +261,7 @@ public class JPAContext implements IContext  {
         this._em = _emf.createEntityManager();
         this._clientRepository = new ClientRepository();
         this._bycicleRepository = new BycicleRepository();
+        this._reservationRepository = new ReservationRepository();
 
     }
 

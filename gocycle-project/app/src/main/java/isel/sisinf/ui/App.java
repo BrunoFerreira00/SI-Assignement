@@ -26,6 +26,7 @@ package isel.sisinf.ui;
 import isel.sisinf.jpa.JPAContext;
 import isel.sisinf.model.Client;
 
+import java.sql.Timestamp;
 import java.util.Scanner;
 import java.util.HashMap;
 
@@ -209,23 +210,15 @@ class UI
 
     private void checkBikeAvailability()
     {
-        ctx.getBycicles().checkAvailability().forEach(b -> {
-            System.out.println("Type: " + b.getAtrdisc());
-            System.out.println("Code: " + b.getId_bicicleta());
-            System.out.println("Weight: " + b.getPeso());
-            System.out.println("Model: " + b.getModelo());
-            System.out.println("Brand: " + b.getMarca());
-            System.out.println("Change System: " + b.getMudanca());
-            System.out.println("State: " + b.getEstado());
-            System.out.println("GPS: " + b.getGps());
-            System.out.println();
-        });
+       System.out.println(ctx.getBycicles().checkAvailability(Timestamp.valueOf( "2024-01-01 00:00:00"), 3));
         System.out.println("checkBikeAvailability()");
 
     }
 
     private void obtainBookings() {
-        ctx.getBookings().find("SELECT r FROM reservation r").forEach (r ->{
+        if(ctx.getBookings().find("SELECT r FROM reserva r").isEmpty())
+            System.out.println("No bookings available"  );
+        ctx.getBookings().find("SELECT r FROM reserva r").forEach (r ->{
             System.out.println("Número de reserva: " + r.getId());
             System.out.println("Loja: " + r.getShop());
             System.out.println("Data de ínicio: " + r.getInitialDate());
