@@ -255,7 +255,12 @@ class UI
 
     private void cancelBooking()
     {
-        // TODO
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter booking id: ");
+        int bookingId = scanner.nextInt();
+        ctx.beginTransaction();
+        ctx.getBookings().delete(ctx.getBookings().findByKey(bookingId));
+        ctx.commit();
         System.out.println("cancelBooking");
         
     }

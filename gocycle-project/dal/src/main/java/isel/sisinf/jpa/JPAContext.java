@@ -1,6 +1,7 @@
 package isel.sisinf.jpa;
 
 import isel.sisinf.model.*;
+import isel.sisinf.model.genericInterfaces.IClientBooking;
 import isel.sisinf.model.genericInterfaces.IReservation;
 import jakarta.persistence.*;
 import org.eclipse.persistence.sessions.DatabaseLogin;
@@ -25,6 +26,8 @@ public class JPAContext implements IContext  {
     private IElectricBicycleRepository _electricBicycleRepository;
     private IClientRepository _clientRepository;
     private IReservationRepository _reservationRepository;
+
+    private IClientBookingRepository _clientBookingRepository;
     protected List helperQueryImpl(String jpql, Object... params)
     {
         Query q = _em.createQuery(jpql);
@@ -235,17 +238,44 @@ public class JPAContext implements IContext  {
 
         @Override
         public Reservation delete(Reservation entity) {
-            return null;
+            return (Reservation) helperDeleteteImpl(entity);
         }
 
         @Override
         public Reservation findByKey(Integer key) {
-            return null;
+            return _em.find(Reservation.class, key);
         }
 
         @Override
         public Collection<Reservation> find(String jpql, Object... params) {
             return (Collection<Reservation>) helperQueryImpl(jpql,params);
+        }
+    }
+
+    protected class ClientReservationRepository implements IClientBookingRepository {
+        @Override
+        public ClientBooking create(ClientBooking entity) {
+            return (ClientBooking) helperCreateImpl(entity);
+        }
+
+        @Override
+        public ClientBooking update(ClientBooking entity) {
+            return null;
+        }
+
+        @Override
+        public ClientBooking delete(ClientBooking entity) {
+            return null;
+        }
+
+        @Override
+        public ClientBooking findByKey(Integer key) {
+            return _em.find(ClientBooking.class, key);
+        }
+
+        @Override
+        public Collection<ClientBooking> find(String jpql, Object... params) {
+            return (Collection<ClientBooking>) helperQueryImpl(jpql, params);
         }
     }
 
@@ -262,6 +292,7 @@ public class JPAContext implements IContext  {
         this._clientRepository = new ClientRepository();
         this._bycicleRepository = new BycicleRepository();
         this._reservationRepository = new ReservationRepository();
+        this._clientBookingRepository = new ClientBookingRepository();
 
     }
 
