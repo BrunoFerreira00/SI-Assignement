@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SI-Assignement.iml" filepath="$PROJECT_DIR$/.idea/SI-Assignement.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gocycle-project/model/model.iml" filepath="$PROJECT_DIR$/gocycle-project/model/model.iml" />
     </modules>
   </component>
 </project>

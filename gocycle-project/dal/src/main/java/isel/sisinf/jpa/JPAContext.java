@@ -1,6 +1,7 @@
 package isel.sisinf.jpa;
 
 import isel.sisinf.model.*;
+import isel.sisinf.model.genericInterfaces.IReservation;
 import jakarta.persistence.*;
 import org.eclipse.persistence.sessions.DatabaseLogin;
 import org.eclipse.persistence.sessions.Session;
@@ -126,6 +127,11 @@ public class JPAContext implements IContext  {
         return _bycicleRepository;
     }
 
+    @Override
+    public IReservationRepository getBookings() {
+        return _reservationRepository;
+    }
+
 
     @Override
     public void close() throws Exception {
@@ -212,6 +218,31 @@ public class JPAContext implements IContext  {
             }
 
 
+        }
+    }
+
+    protected class ReservationRepository implements IReservationRepository{
+        @Override
+        public Reservation create(Reservation entity){return (Reservation) helperCreateImpl(entity);}
+
+        @Override
+        public Reservation update(Reservation entity) {
+            return null;
+        }
+
+        @Override
+        public Reservation delete(Reservation entity) {
+            return null;
+        }
+
+        @Override
+        public Reservation findByKey(Integer key) {
+            return null;
+        }
+
+        @Override
+        public Collection<Reservation> find(String jpql, Object... params) {
+            return (Collection<Reservation>) helperQueryImpl(jpql,params);
         }
     }
 

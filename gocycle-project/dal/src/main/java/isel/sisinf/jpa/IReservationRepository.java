@@ -7,5 +7,5 @@ import isel.sisinf.model.genericInterfaces.IReservation;
 
 import java.util.Collection;
 
-public interface IReservationRepository extends IRepository<IReservation, Collection<IReservation>,Integer>, IReservationDataMapper {
+public interface IReservationRepository extends IRepository<Reservation, Collection<Reservation>,Integer>, IReservationDataMapper {
 }

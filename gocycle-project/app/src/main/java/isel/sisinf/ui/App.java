@@ -225,7 +225,14 @@ class UI
     }
 
     private void obtainBookings() {
-        // TODO
+        ctx.getBookings().find("SELECT r FROM reservation r").forEach (r ->{
+            System.out.println("Número de reserva: " + r.getId());
+            System.out.println("Loja: " + r.getShop());
+            System.out.println("Data de ínicio: " + r.getInitialDate());
+            System.out.println("Data final: " + r.getFinalDate());
+            System.out.println("Valor: " + r.getPrice());
+            System.out.println("Bicicleta: " + r.getBicycleCode());
+        });
         System.out.println("obtainBookings()");
     }
 

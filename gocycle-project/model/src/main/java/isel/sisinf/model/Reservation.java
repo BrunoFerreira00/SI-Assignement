@@ -6,11 +6,13 @@ import jakarta.persistence.Id;
 @Entity(name = "reserva")
 public class Reservation {
     @Id
-    private Integer code;
-    private String initialDate;
-    private String finalDate;
-    private Integer bicycleCode;
-    private String price;
+    private Integer noreserva;
+    private Integer loja;
+    private String dtinicio;
+    private String dtfim;
+    private String valor;
+    private Integer bicicleta;
+
 /*
     public Reservation(Integer code, String initialDate, String finalDate, Integer bicycleCode, String price) {
         this.code = code;
@@ -22,43 +24,42 @@ public class Reservation {
 
  */
 
-    public Integer getCode() {
-        return code;
+    public Integer getId() {
+        return noreserva;
     }
+    public Integer getShop(){return loja;}
 
     public String getInitialDate() {
-        return initialDate;
+        return dtinicio;
     }
 
     public String getFinalDate() {
-        return finalDate;
+        return dtfim;
     }
 
     public Integer getBicycleCode() {
-        return bicycleCode;
+        return bicicleta;
     }
 
-    public String getPrice() {
-        return price;
+    public String getPrice() {return valor;}
+
+    public void setId(Integer noreserva){this.noreserva = noreserva;}
+
+    public void setShop(Integer loja){this.loja = loja;}
+
+    public void setInitialDate(String dtinicio){
+        this.dtinicio = dtinicio;
     }
 
-    public void setCode(Integer code){
-        this.code = code;
+    public void setFinalDate(String dtfim){
+        this.dtfim = dtfim;
+    }
+    public void setBicycleCode(Integer bicicleta){
+        this.bicicleta = bicicleta;
     }
 
-    public void setInitialDate(String initialDate){
-        this.initialDate = initialDate;
-    }
-
-    public void setFinalDate(String finalDate){
-        this.finalDate = finalDate;
-    }
-    public void setBicycleCode(Integer bicycleCode){
-        this.bicycleCode = bicycleCode;
-    }
-
-    public void setPrice(String price){
-        this.price = price;
+    public void setPrice(String valor){
+        this.valor = valor;
     }
 
 }
