@@ -1,19 +1,20 @@
 package isel.sisinf.model;
 
+import isel.sisinf.model.genericInterfaces.IEletricBicycle;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity(name = "eletrica")
 public class EletricBicycle implements IEletricBicycle {
     private String type;
-    @Id
+    @Id // should be OneToOne with Bycicle
     private Integer code;
     private Integer weight;
     private String model;
     private String brand;
     private Integer changeSystem; // Can only be {1, 6, 18, 24}
     private String state; // Can only be {livre, ocupado, reserva, em manutenção}
-    private String GPS;
+    private Integer GPS;
     private Integer autonomy;
     private Integer maxSpeed;
 
@@ -70,7 +71,7 @@ public class EletricBicycle implements IEletricBicycle {
         return state;
     }
 
-    public String getGps() {
+    public Integer getGps() {
         return GPS;
     }
 
@@ -95,7 +96,7 @@ public class EletricBicycle implements IEletricBicycle {
     public void setEstado(String estado) {
         this.state = estado;
     }
-    public void setGps(String gps) {
+    public void setGps(Integer gps) {
         this.GPS = gps;
     }
     public void setAutonomy(Integer autonomy){

@@ -3,6 +3,7 @@ package isel.sisinf.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity(name = "loja")
 public class Shop {
@@ -68,5 +69,16 @@ public class Shop {
 
     public void setEmail(String email){
         this.email = email;
+    }
+
+    @ManyToOne(optional = false)
+    private Bycicle bycicles;
+
+    public Bycicle getBycicles() {
+        return bycicles;
+    }
+
+    public void setBycicles(Bycicle bycicles) {
+        this.bycicles = bycicles;
     }
 }
