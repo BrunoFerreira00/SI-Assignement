@@ -11,6 +11,7 @@ CREATE OR REPLACE PROCEDURE MakeReservation(
 AS $$
 DECLARE
     noReserva_p INTEGER;
+    atrdisc_p CHAR(1);
 BEGIN
 
     IF NOT EXISTS (SELECT 1 FROM LOJA WHERE codigo = lojaId) THEN
@@ -21,9 +22,15 @@ BEGIN
         RAISE EXCEPTION 'Invalid bicycle ID';
     END IF;
 
+    IF EXISTS(SELECT 1 FROM BICICLETA WHERE id_bicicleta = bicicletaId AND estado != 'livre') THEN
+        RAISE EXCEPTION 'Bicycle is not available';
+    END IF;
+
     IF dtInicio_p >= dtFim_p THEN
         RAISE EXCEPTION 'Invalid date range';
     END IF;
+
+
 
     SELECT COALESCE(MAX(noreserva), 0) + 1 INTO noReserva_p FROM RESERVA;
 
@@ -32,6 +39,8 @@ BEGIN
 
     INSERT INTO clientereserva (cliente, reserva, loja) VALUES
     (client_id, noReserva_p, lojaId);
+
+    UPDATE BICICLETA SET estado = 'ocupado' WHERE id_bicicleta = bicicletaId;
 
 
 

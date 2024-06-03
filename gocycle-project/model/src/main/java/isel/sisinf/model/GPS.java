@@ -10,14 +10,14 @@ public class GPS {
     private String location; // Might be private String latitude and longitude;
 
     private String batteryPercentage;
-/*
-    public GPS(String serialNumber, String location, String batteryPercentage) {
+
+    public void GPS() {}
+
+    public void GPS(String serialNumber, String location, String batteryPercentage) {
         this.serialNumber = serialNumber;
         this.location = location;
         this.batteryPercentage = batteryPercentage;
     }
-
- */
 
     public String getSerialNumber() {
         return serialNumber;

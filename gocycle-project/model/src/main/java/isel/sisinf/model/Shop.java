@@ -14,8 +14,10 @@ public class Shop {
     private String locality;
     private String phoneNumber;
     private String email;
-/*
-    public Shop(Integer code, String manager, String address, String locality, String phoneNumber, String email) {
+
+    public void Shop() {}
+
+    public void Shop(Integer code, String manager, String address, String locality, String phoneNumber, String email) {
         this.code = code;
         this.manager = manager;
         this.address = address;
@@ -23,8 +25,6 @@ public class Shop {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
-
- */
 
     public Integer getCode() {
         return code;

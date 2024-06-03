@@ -20,16 +20,16 @@ public class Reservation {
     private BigDecimal valor;
     private Integer bicicleta; // OneToOne with Bycicle
 
-/*
-    public Reservation(Integer code, String initialDate, String finalDate, Integer bicycleCode, String price) {
-        this.code = code;
-        this.initialDate = initialDate;
-        this.finalDate = finalDate;
-        this.bicycleCode = bicycleCode;
-        this.price = price;
-    }
+    public void Reservation() {}
 
- */
+    public void Reservation(Integer noreserva, Integer loja, Timestamp dtinicio, Timestamp dtfim, BigDecimal valor, Integer bicicleta) {
+        this.noreserva = noreserva;
+        this.loja = loja;
+        this.dtinicio = dtinicio;
+        this.dtfim = dtfim;
+        this.valor = valor;
+        this.bicicleta = bicicleta;
+    }
 
     public Integer getId() {
         return noreserva;

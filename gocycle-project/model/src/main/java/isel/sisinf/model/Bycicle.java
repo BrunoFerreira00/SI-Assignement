@@ -19,18 +19,19 @@ public class Bycicle implements IBycicle {
     // one to many means that one shop can have many Bycicles
     private Integer gps;
 
-    /*
-    public Bicycle(String atrdisc, Integer id_bicicleta, Integer peso, String modelo, String marca, Integer mudanca, String state, String gps) {
+    public void Bycicle() {}
+
+    public void Bycicle(String atrdisc, Integer id_bicicleta, Integer peso, String modelo, String marca, Integer mudanca, String estado, String gps) {
         this.atrdisc = atrdisc;
         this.id_bicicleta = id_bicicleta;
         this.peso = peso;
         this.modelo = modelo;
         this.marca = marca;
         this.mudanca = mudanca;
-        this.state = state;
+        this.estado = estado;
         this.gps = gps;
     }
-     */
+
     public String getAtrdisc() {
         return atrdisc;
     }
