@@ -21,7 +21,7 @@ public class Bycicle implements IBycicle {
 
     public void Bycicle() {}
 
-    public void Bycicle(String atrdisc, Integer id_bicicleta, Integer peso, String modelo, String marca, Integer mudanca, String estado, String gps) {
+    public void Bycicle(String atrdisc, Integer id_bicicleta, Integer peso, String modelo, String marca, Integer mudanca, String estado, Integer gps) {
         this.atrdisc = atrdisc;
         this.id_bicicleta = id_bicicleta;
         this.peso = peso;
@@ -89,11 +89,4 @@ public class Bycicle implements IBycicle {
         this.gps = gps;
     }
 
-    public Shop getShop() {
-        return shop;
-    }
-
-    public void setShop(Shop shop) {
-        this.shop = shop;
-    }
 }
