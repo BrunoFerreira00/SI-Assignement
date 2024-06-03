@@ -19,6 +19,14 @@ public class ClientBooking {
     })
     private Reservation reservation;
 
+    public void ClientBooking() {}
+
+    public void ClientBooking(ClientReservationId id, Client client, Reservation reservation) {
+        this.id = id;
+        this.client = client;
+        this.reservation = reservation;
+    }
+
     public ClientReservationId getId() {
         return id;
     }

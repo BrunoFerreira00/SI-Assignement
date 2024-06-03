@@ -16,17 +16,19 @@ public class Client {
 
     private String atrdisc;
 
-/*
-    public Client(Integer code, String name, String address, String phoneNumber, String CC, String passport, String citizenship) {
-        this.code = code;
-        this.name = name;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.CC = CC;
-        this.passport = passport;
-        this.citizenship = citizenship;
+    public void Client() {}
+
+    public void Client(Integer id, String nome, String morada, String email, String telefone, String noident, String nacionalidade, String atrdisc) {
+        this.id = id;
+        this.nome = nome;
+        this.morada = morada;
+        this.email = email;
+        this.telefone = telefone;
+        this.noident = noident;
+        this.nacionalidade = nacionalidade;
+        this.atrdisc = atrdisc;
     }
-*/
+
     public Integer getId() {
         return id;
     }

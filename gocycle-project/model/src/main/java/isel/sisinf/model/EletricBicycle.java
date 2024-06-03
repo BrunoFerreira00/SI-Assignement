@@ -17,10 +17,9 @@ public class EletricBicycle implements IEletricBicycle {
     private Integer autonomy;
     private Integer maxSpeed;
 
-/*
-    public EletricBicycle(Integer autonomy, Integer maxSpeed,String type, Integer code, Integer weight, String model, String brand, Integer changeSystem, String state, String GPS) {
-        this.autonomy = autonomy;
-        this.maxSpeed = maxSpeed;
+    public void EletricBicycle() {}
+
+    public void EletricBicycle(String type, Integer code, Integer weight, String model, String brand, Integer changeSystem, String state, String GPS, Integer autonomy, Integer maxSpeed) {
         this.type = type;
         this.code = code;
         this.weight = weight;
@@ -29,10 +28,12 @@ public class EletricBicycle implements IEletricBicycle {
         this.changeSystem = changeSystem;
         this.state = state;
         this.GPS = GPS;
+        this.autonomy = autonomy;
+        this.maxSpeed = maxSpeed;
     }
 
 
- */
+
 
     public Integer getAutonomy() {
         return autonomy;
