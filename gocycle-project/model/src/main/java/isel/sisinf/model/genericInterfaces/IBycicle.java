@@ -1,4 +1,4 @@
-package isel.sisinf.model;
+package isel.sisinf.model.genericInterfaces;
 
 public interface IBycicle {
     String getAtrdisc();
@@ -8,7 +8,7 @@ public interface IBycicle {
     String getMarca();
     Integer getMudanca();
     String getEstado();
-    String getGps();
+    Integer getGps();
 
     void setAtrdisc(String atrdisc);
     void setId_bicicleta(Integer id_bicicleta);
@@ -17,7 +17,7 @@ public interface IBycicle {
     void setMarca(String marca);
     void setMudanca(Integer mudanca);
     void setEstado(String estado);
-    void setGps(String gps);
+    void setGps(Integer gps);
 
 
 }

@@ -11,12 +11,14 @@ import java.sql.Timestamp;
 public class Reservation {
     @Id
     private Integer noreserva;
-    private Integer loja;
+
+
+    private Integer loja; // OneToOne with Shop
     private Timestamp dtinicio;
     private Timestamp dtfim;
     @Column(name = "valor", precision = 5, scale = 2)
     private BigDecimal valor;
-    private Integer bicicleta;
+    private Integer bicicleta; // OneToOne with Bycicle
 
     public void Reservation() {}
 

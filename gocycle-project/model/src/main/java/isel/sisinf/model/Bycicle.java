@@ -1,7 +1,7 @@
 package isel.sisinf.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import isel.sisinf.model.genericInterfaces.IBycicle;
+import jakarta.persistence.*;
 
 @Entity(name = "bicicleta")
 public class Bycicle implements IBycicle {
@@ -13,11 +13,15 @@ public class Bycicle implements IBycicle {
     private String marca;
     private Integer mudanca; // Can only be {1, 6, 18, 24}
     private String estado; // Can only be {livre, ocupado, reserva, em manutenção}
-    private String gps;
+
+
+    //private Shop shop; should be one to Many with Shop
+    // one to many means that one shop can have many Bycicles
+    private Integer gps;
 
     public void Bycicle() {}
 
-    public void Bycicle(String atrdisc, Integer id_bicicleta, Integer peso, String modelo, String marca, Integer mudanca, String estado, String gps) {
+    public void Bycicle(String atrdisc, Integer id_bicicleta, Integer peso, String modelo, String marca, Integer mudanca, String estado, Integer gps) {
         this.atrdisc = atrdisc;
         this.id_bicicleta = id_bicicleta;
         this.peso = peso;
@@ -56,7 +60,7 @@ public class Bycicle implements IBycicle {
         return estado;
     }
 
-    public String getGps() {
+    public Integer getGps() {
         return gps;
     }
 
@@ -81,7 +85,8 @@ public class Bycicle implements IBycicle {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    public void setGps(String gps) {
+    public void setGps(Integer gps) {
         this.gps = gps;
     }
+
 }
