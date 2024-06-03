@@ -1,14 +1,10 @@
 package isel.sisinf.jpa;
 
 import isel.sisinf.model.*;
-import isel.sisinf.model.genericInterfaces.IClientBooking;
-import isel.sisinf.model.genericInterfaces.IReservation;
 import jakarta.persistence.*;
 import org.eclipse.persistence.sessions.DatabaseLogin;
 import org.eclipse.persistence.sessions.Session;
-import org.postgresql.core.NativeQuery;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
@@ -18,9 +14,7 @@ public class JPAContext implements IContext  {
     private EntityManagerFactory _emf;
     private EntityManager _em;
 
-    //Simple implementation for flat transaction support
     private EntityTransaction _tx;
-    //b) What is the purpose of _txCount?
     private int _txcount;
     private IShopRepository _shopRepository;
     private IGPSRepository _gpsRepository;
@@ -236,12 +230,12 @@ public class JPAContext implements IContext  {
 
     protected class ReservationRepository implements IReservationRepository{
         @Override
-        public Reservation create(Reservation entity) {
+        public void createReservation(Reservation entity, Integer client_id) {
             try {
 
 
                 _em.getTransaction().begin();
-                Query query = _em.createNativeQuery("call MakeReservation(?1,?2,?3,?4,?5)");
+                Query query = _em.createNativeQuery("call MakeReservation(?1,?2,?3,?4,?5,?6)");
                 // Register the parameters with their positions and types
                 /*query.registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN);
                 query.registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN);
@@ -250,16 +244,16 @@ public class JPAContext implements IContext  {
                 query.registerStoredProcedureParameter(5, Double.class, ParameterMode.IN);*/
 
                 // Set the parameter values by position
-                query.setParameter(1, entity.getShop());
-                query.setParameter(2, entity.getBicycleCode());
-                query.setParameter(3, entity.getInitialDate());
-                query.setParameter(4, entity.getFinalDate());
-                query.setParameter(5, entity.getPrice());
+                query.setParameter(1,client_id);
+                query.setParameter(2, entity.getShop());
+                query.setParameter(3, entity.getBicycleCode());
+                query.setParameter(4, entity.getInitialDate());
+                query.setParameter(5, entity.getFinalDate());
+                query.setParameter(6, entity.getPrice());
 
                 // Execute the stored procedure
                 query.executeUpdate();
                 _em.getTransaction().commit();
-                return entity;
             } catch (Exception e) {
                 // Log the exception (consider using a logging framework)
                 System.err.println("Error during reservation creation: " + e.getMessage());
@@ -268,6 +262,11 @@ public class JPAContext implements IContext  {
             }
         }
 
+
+        @Override
+        public Reservation create(Reservation entity) {
+            return null;
+        }
 
         @Override
         public Reservation update(Reservation entity) {
@@ -311,12 +310,17 @@ public class JPAContext implements IContext  {
 
         @Override
         public ClientBooking delete(ClientBooking entity) {
-            return null;
+            return (ClientBooking) helperDeleteteImpl(entity);
+        }
+
+        @Override
+        public ClientBooking findByEmbeddedKey(ClientReservationId key) {
+            return _em.find(ClientBooking.class, key);
         }
 
         @Override
         public ClientBooking findByKey(Integer key) {
-            return _em.find(ClientBooking.class, key);
+            return null;
         }
 
         @Override

@@ -1,6 +1,6 @@
 
 CREATE OR REPLACE PROCEDURE MakeReservation(
-    --IN clienteId INTEGER,
+    IN client_id INTEGER,
     IN lojaId INTEGER,
     IN bicicletaId INTEGER,
     IN dtInicio_p TIMESTAMP,
@@ -30,9 +30,9 @@ BEGIN
     INSERT INTO RESERVA (noreserva,loja, dtinicio, dtfim, valor, bicicleta)
     VALUES (noReserva_p,lojaId, dtInicio_p, dtFim_p, valor_p, bicicletaId);
 
+    INSERT INTO clientereserva (cliente, reserva, loja) VALUES
+    (client_id, noReserva_p, lojaId);
 
-    --INSERT INTO CLIENTERESERVA (cliente, reserva, loja)
-    --VALUES (clienteId, noReserva_p, lojaId);
 
 
 END

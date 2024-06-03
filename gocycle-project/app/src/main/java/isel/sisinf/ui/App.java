@@ -25,7 +25,7 @@ package isel.sisinf.ui;
 
 import isel.sisinf.jpa.JPAContext;
 import isel.sisinf.model.Client;
-import isel.sisinf.model.ClientBooking;
+import isel.sisinf.model.ClientReservationId;
 import isel.sisinf.model.Reservation;
 
 import java.math.BigDecimal;
@@ -174,7 +174,6 @@ class UI
         System.out.print("Enter client citizenship: ");
         String citizenship = scanner.nextLine();
         ctx.beginTransaction();
-        // get client with biggest id
         int lastId = ctx.getClients().findClientWithBiggestId() == null ? 0 : ctx.getClients().findClientWithBiggestId().getId();
         Client client = new Client();
         client.setId(lastId + 1);
@@ -312,15 +311,15 @@ class UI
         reservation.setPrice(BigDecimal.valueOf(value));
         reservation.setBicycleCode(bicycleId);
 
-        ctx.getBookings().create(reservation);
+        ctx.getBookings().createReservation(reservation,clientId);
 
         // Create the client-reservation relationship
-        ClientBooking clientReservation = new ClientBooking();
+        /*ClientBooking clientReservation = new ClientBooking();
         clientReservation.setClientCode(clientId);
         clientReservation.setBookingCode(lastId + 1);
         clientReservation.setShopCode(shopId);
 
-        ctx.getClientBookings().create(clientReservation);
+        ctx.getClientBookings().create(clientReservation);*/
 
 
         System.out.println("Reservation created successfully!");
@@ -332,6 +331,24 @@ class UI
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter booking id: ");
         int bookingId = scanner.nextInt();
+
+        System.out.print("Enter client id: ");
+        int clientId = scanner.nextInt();
+
+        System.out.print("Enter shop id: ");
+        int shopId = scanner.nextInt();
+
+        ClientReservationId clientBookingId = new ClientReservationId();
+        clientBookingId.setCliente(clientId);
+        clientBookingId.setReserva(bookingId);
+        clientBookingId.setLoja(shopId);
+
+        ctx.beginTransaction();
+        ctx.getClientBookings().delete(ctx.getClientBookings().findByEmbeddedKey(clientBookingId));
+        ctx.commit();
+
+
+
         ctx.beginTransaction();
         ctx.getBookings().delete(ctx.getBookings().findByKey(bookingId));
         ctx.commit();

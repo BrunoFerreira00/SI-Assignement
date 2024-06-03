@@ -1,37 +1,70 @@
 package isel.sisinf.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity(name = "clientereserva")
 public class ClientBooking {
-    private Integer cliente;
-    @Id
-    private Integer reserva;
 
-    private Integer loja;
+    @EmbeddedId
+    private ClientReservationId id;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente", insertable = false, updatable = false)
+    private Client client;
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "reserva", insertable = false, updatable = false),
+            @JoinColumn(name = "loja", insertable = false, updatable = false)
+    })
+    private Reservation reservation;
+
+    public ClientReservationId getId() {
+        return id;
+    }
+
+    public void setId(ClientReservationId id) {
+        this.id = id;
+    }
 
     public Integer getClientCode() {
-        return cliente;
+        return id.getCliente();
     }
 
     public void setClientCode(Integer cliente) {
-        this.cliente = cliente;
+        id.setCliente(cliente);
     }
 
     public Integer getBookingCode() {
-        return reserva;
+        return id.getReserva();
     }
 
     public void setBookingCode(Integer reserva) {
-        this.reserva = reserva;
+        id.setReserva(reserva);
     }
 
     public Integer getShopCode() {
-        return loja;
+        return id.getLoja();
     }
 
     public void setShopCode(Integer loja) {
-        this.loja = loja;
+        id.setLoja(loja);
+    }
+
+    // Getters and setters for the associated entities
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 }
