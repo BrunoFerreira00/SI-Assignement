@@ -4,11 +4,6 @@ import isel.sisinf.model.Bycicle;
 import isel.sisinf.model.EletricBicycle;
 import isel.sisinf.model.Reservation;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
-
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
