@@ -1,3 +1,4 @@
+/*
 package isel.sisinf.service;
 
 import isel.sisinf.model.Bycicle;
@@ -58,3 +59,4 @@ public class BicicletaService {
         }
     }
 }
+*/
