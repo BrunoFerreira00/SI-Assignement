@@ -1,6 +1,7 @@
 package isel.sisinf.jpa;
 
 import isel.sisinf.model.*;
+import isel.sisinf.model.genericInterfaces.IShop;
 import jakarta.persistence.*;
 import org.eclipse.persistence.sessions.DatabaseLogin;
 import org.eclipse.persistence.sessions.Session;
@@ -134,6 +135,11 @@ public class JPAContext implements IContext  {
     }
 
     @Override
+    public IShopRepository getShops() {
+        return _shopRepository;
+    }
+
+    @Override
     public IClientBookingRepository getClientBookings() {
         return _clientBookingRepository;
     }
@@ -185,28 +191,28 @@ public class JPAContext implements IContext  {
     protected class BycicleRepository implements IBycicleRepository {
 
         @Override
-        public Bycicle create(Bycicle entity) {
-            return (Bycicle) helperCreateImpl(entity);
+        public Bicycle create(Bicycle entity) {
+            return (Bicycle) helperCreateImpl(entity);
         }
 
         @Override
-        public Bycicle update(Bycicle entity) {
+        public Bicycle update(Bicycle entity) {
             return null;
         }
 
         @Override
-        public Bycicle delete(Bycicle entity) {
+        public Bicycle delete(Bicycle entity) {
             return null;
         }
 
         @Override
-        public Bycicle findByKey(Integer key) {
-            return _em.find(Bycicle.class, key);
+        public Bicycle findByKey(Integer key) {
+            return _em.find(Bicycle.class, key);
         }
 
         @Override
-        public Collection<Bycicle> find(String jpql, Object... params) {
-            return (Collection<Bycicle>) helperQueryImpl(jpql, params);
+        public Collection<Bicycle> find(String jpql, Object... params) {
+            return (Collection<Bicycle>) helperQueryImpl(jpql, params);
         }
 
         @Override
@@ -245,11 +251,11 @@ public class JPAContext implements IContext  {
 
                 // Set the parameter values by position
                 query.setParameter(1,client_id);
-                query.setParameter(2, entity.getShop());
-                query.setParameter(3, entity.getBicycleCode());
-                query.setParameter(4, entity.getInitialDate());
-                query.setParameter(5, entity.getFinalDate());
-                query.setParameter(6, entity.getPrice());
+                query.setParameter(2, entity.getLoja());
+                query.setParameter(3, entity.getNoreserva());
+                query.setParameter(4, entity.getDtinicio());
+                query.setParameter(5, entity.getDtfim());
+                query.setParameter(6, entity.getValor());
 
                 // Execute the stored procedure
                 query.executeUpdate();
@@ -327,6 +333,40 @@ public class JPAContext implements IContext  {
         public Collection<ClientBooking> find(String jpql, Object... params) {
             return (Collection<ClientBooking>) helperQueryImpl(jpql, params);
         }
+        
+    }
+    
+    protected class shopRepository implements IShopRepository {
+        @Override
+        public Shop create(Shop entity) {
+            return (Shop) helperCreateImpl(entity);
+        }
+
+        @Override
+        public Shop update(Shop entity) {
+            return null;
+        }
+
+        @Override
+        public Shop delete(Shop entity) {
+            return null;
+        }
+
+        @Override
+        public Shop findShopByKey(Integer key) {
+            return _em.find(Shop.class, key);
+        }
+
+
+        @Override
+        public IShop findByKey(Integer key) {
+            return null;
+        }
+
+        @Override
+        public Collection<IShop> find(String jpql, Object... params) {
+            return null;
+        }
     }
 
     public JPAContext() {
@@ -343,6 +383,7 @@ public class JPAContext implements IContext  {
         this._bycicleRepository = new BycicleRepository();
         this._reservationRepository = new ReservationRepository();
         this._clientBookingRepository = new ClientReservationRepository();
+        this._shopRepository = new shopRepository();
 
     }
 

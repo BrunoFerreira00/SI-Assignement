@@ -1,23 +1,37 @@
 package isel.sisinf.model.genericInterfaces;
 
-public interface IBycicle {
-    String getAtrdisc();
-    Integer getId_bicicleta();
-    Integer getPeso();
-    String getModelo();
-    String getMarca();
-    Integer getMudanca();
-    String getEstado();
-    Integer getGps();
+import isel.sisinf.model.EletricBicycle;
+import isel.sisinf.model.GPS;
+import isel.sisinf.model.Reservation;
+import isel.sisinf.model.Shop;
 
-    void setAtrdisc(String atrdisc);
-    void setId_bicicleta(Integer id_bicicleta);
-    void setPeso(Integer peso);
-    void setModelo(String modelo);
-    void setMarca(String marca);
-    void setMudanca(Integer mudanca);
-    void setEstado(String estado);
-    void setGps(Integer gps);
+import java.util.List;
+
+public interface IBycicle {
+    Integer getId();
+    Double getWeight();
+    Integer getRadius();
+    String getModel();
+    String getBrand();
+    Integer getGear();
+    String getState();
+    String getDisc();
+    GPS getGps();
+    Shop getShop();
+    EletricBicycle getElectric();
+    List<Reservation> getReservations();
+    void setId(Integer id);
+    void setWeight(Double weight);
+    void setRadius(Integer radius);
+    void setModel(String model);
+    void setBrand(String brand);
+    void setGear(Integer gear);
+    void setState(String state);
+    void setDisc(String disc);
+    void setGps(GPS gps);
+    void setShop(Shop shop);
+    void setElectric(EletricBicycle electric);
+    void setReservations(List<Reservation> reservations);
 
 
 }

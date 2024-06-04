@@ -2,12 +2,15 @@ package isel.sisinf.model;
 
 import java.io.Serializable;
 import java.util.Objects;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class ClientReservationId implements Serializable {
     private Integer cliente;
     private Integer reserva;
+    @Column(name = "loja", insertable = false, updatable = false)
     private Integer loja;
 
     // Default constructor

@@ -1,13 +1,6 @@
-package isel.sisinf.service;
 
-import isel.sisinf.model.Bycicle;
-import isel.sisinf.model.EletricBicycle;
-import isel.sisinf.model.Reservation;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.List;
-
+/*
 public class BicicletaService {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("gocyclePU");
 
@@ -46,4 +39,4 @@ public class BicicletaService {
             em.close();
         }
     }
-}
+}*/

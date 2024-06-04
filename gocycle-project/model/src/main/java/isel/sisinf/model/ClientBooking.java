@@ -9,23 +9,18 @@ public class ClientBooking {
     private ClientReservationId id;
 
     @ManyToOne
-    @JoinColumn(name = "cliente", insertable = false, updatable = false)
-    private Client client;
+    @MapsId("cliente")
+    @JoinColumn(name = "cliente", nullable = false)
+    private Client cliente;
 
     @ManyToOne
+    @MapsId("reserva")
     @JoinColumns({
-            @JoinColumn(name = "reserva", insertable = false, updatable = false),
-            @JoinColumn(name = "loja", insertable = false, updatable = false)
+            @JoinColumn(name = "reserva", referencedColumnName = "noreserva"),
+            @JoinColumn(name = "loja", referencedColumnName = "loja")
     })
-    private Reservation reservation;
+    private Reservation reserva;
 
-    public void ClientBooking() {}
-
-    public void ClientBooking(ClientReservationId id, Client client, Reservation reservation) {
-        this.id = id;
-        this.client = client;
-        this.reservation = reservation;
-    }
 
     public ClientReservationId getId() {
         return id;
@@ -35,44 +30,19 @@ public class ClientBooking {
         this.id = id;
     }
 
-    public Integer getClientCode() {
-        return id.getCliente();
+    public Client getCliente() {
+        return cliente;
     }
 
-    public void setClientCode(Integer cliente) {
-        id.setCliente(cliente);
+    public void setCliente(Client cliente) {
+        this.cliente = cliente;
     }
 
-    public Integer getBookingCode() {
-        return id.getReserva();
+    public Reservation getReserva() {
+        return reserva;
     }
 
-    public void setBookingCode(Integer reserva) {
-        id.setReserva(reserva);
-    }
-
-    public Integer getShopCode() {
-        return id.getLoja();
-    }
-
-    public void setShopCode(Integer loja) {
-        id.setLoja(loja);
-    }
-
-    // Getters and setters for the associated entities
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Reservation getReservation() {
-        return reservation;
-    }
-
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
+    public void setReserva(Reservation reserva) {
+        this.reserva = reserva;
     }
 }

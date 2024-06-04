@@ -1,72 +1,102 @@
 package isel.sisinf.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity(name = "reserva")
 public class Reservation {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer noreserva;
 
+    @ManyToOne
+    @JoinColumn(name = "loja", nullable = false)
+    private Shop loja;
 
-    private Integer loja; // OneToOne with Shop
+    @Column(nullable = false)
     private Timestamp dtinicio;
+
+    @Column
     private Timestamp dtfim;
-    @Column(name = "valor", precision = 5, scale = 2)
+
+    @Column(precision = 5, scale = 2)
     private BigDecimal valor;
-    private Integer bicicleta; // OneToOne with Bycicle
+
+    @ManyToOne
+    @JoinColumn(name = "bicicleta", nullable = false)
+    private Bicycle bicicleta;
+
+    @OneToMany(mappedBy = "reserva")
+    private List<ClientBooking> clientes;
 
     public void Reservation() {}
 
-    public void Reservation(Integer noreserva, Integer loja, Timestamp dtinicio, Timestamp dtfim, BigDecimal valor, Integer bicicleta) {
+    public void Reservation(Integer noreserva, Shop loja, Timestamp dtinicio, Timestamp dtfim, BigDecimal valor, Bicycle bicicleta, List<ClientBooking> clientes) {
         this.noreserva = noreserva;
         this.loja = loja;
         this.dtinicio = dtinicio;
         this.dtfim = dtfim;
         this.valor = valor;
         this.bicicleta = bicicleta;
+        this.clientes = clientes;
     }
 
-    public Integer getId() {
+    public Integer getNoreserva() {
         return noreserva;
     }
-    public Integer getShop(){return loja;}
 
-    public Timestamp getInitialDate() {
+    public void setNoreserva(Integer noreserva) {
+        this.noreserva = noreserva;
+    }
+
+    public Shop getLoja() {
+        return loja;
+    }
+
+    public void setLoja(Shop loja) {
+        this.loja = loja;
+    }
+
+    public Timestamp getDtinicio() {
         return dtinicio;
     }
 
-    public Timestamp getFinalDate() {
-        return dtfim;
-    }
-
-    public Integer getBicycleCode() {
-        return bicicleta;
-    }
-
-    public BigDecimal getPrice() {return valor;}
-
-    public void setId(Integer noreserva){this.noreserva = noreserva;}
-
-    public void setShop(Integer loja){this.loja = loja;}
-
-    public void setInitialDate(Timestamp dtinicio){
+    public void setDtinicio(Timestamp dtinicio) {
         this.dtinicio = dtinicio;
     }
 
-    public void setFinalDate(Timestamp dtfim){
-        this.dtfim = dtfim;
-    }
-    public void setBicycleCode(Integer bicicleta){
-        this.bicicleta = bicicleta;
+    public Timestamp getDtfim() {
+        return dtfim;
     }
 
-    public void setPrice(BigDecimal valor){
+    public void setDtfim(Timestamp dtfim) {
+        this.dtfim = dtfim;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
+    public Bicycle getBicicleta() {
+        return bicicleta;
+    }
+
+    public void setBicicleta(Bicycle bicicleta) {
+        this.bicicleta = bicicleta;
+    }
+
+    public List<ClientBooking> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<ClientBooking> clientes) {
+        this.clientes = clientes;
+    }
 }

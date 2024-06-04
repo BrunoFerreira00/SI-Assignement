@@ -1,21 +1,27 @@
 package isel.sisinf.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity(name = "gps")
 public class GPS {
    @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private String serialNumber;
-    private String location; // Might be private String latitude and longitude;
+    @Column(nullable = false, precision = 6, scale = 4)
+    private Double latitude;
 
+    @Column(nullable = false, precision = 6, scale = 4)
+    private Double longitude;
+
+    @Column(nullable = false)
     private String batteryPercentage;
 
     public void GPS() {}
 
-    public void GPS(String serialNumber, String location, String batteryPercentage) {
+    public void GPS(String serialNumber, Double latitude, Double longitude, String batteryPercentage) {
         this.serialNumber = serialNumber;
-        this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.batteryPercentage = batteryPercentage;
     }
 
@@ -23,8 +29,12 @@ public class GPS {
         return serialNumber;
     }
 
-    public String getLocation() {
-        return location;
+     public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
     }
 
     public String getBatteryPercentage() {
@@ -35,8 +45,12 @@ public class GPS {
         this.serialNumber = serialNumber;
     }
 
-    public void setLocation(String location){
-        this.location = location;
+    public void setLatitude(Double latitude){
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude){
+        this.longitude = longitude;
     }
 
     public void setBatteryPercentage(String batteryPercentage){

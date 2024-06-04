@@ -19,6 +19,8 @@ public interface IContext extends AutoCloseable {
 
     IClientBookingRepository getClientBookings();
 
+    IShopRepository getShops();
+
 
 
 

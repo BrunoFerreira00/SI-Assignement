@@ -27,6 +27,7 @@ import isel.sisinf.jpa.JPAContext;
 import isel.sisinf.model.Client;
 import isel.sisinf.model.ClientReservationId;
 import isel.sisinf.model.Reservation;
+import isel.sisinf.model.Shop;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -238,12 +239,12 @@ class UI
         if(ctx.getBookings().find("SELECT r FROM reserva r").isEmpty())
             System.out.println("No bookings available"  );
         ctx.getBookings().find("SELECT r FROM reserva r").forEach (r ->{
-            System.out.println("Número de reserva: " + r.getId());
-            System.out.println("Loja: " + r.getShop());
-            System.out.println("Data de ínicio: " + r.getInitialDate());
-            System.out.println("Data final: " + r.getFinalDate());
-            System.out.println("Valor: " + r.getPrice());
-            System.out.println("Bicicleta: " + r.getBicycleCode());
+            System.out.println("Número de reserva: " + r.getNoreserva());
+            System.out.println("Loja: " + r.getLoja());
+            System.out.println("Data de ínicio: " + r.getDtinicio());
+            System.out.println("Data final: " + r.getDtfim());
+            System.out.println("Valor: " + r.getValor());
+            System.out.println("Bicicleta: " + r.getBicicleta());
         });
         System.out.println("obtainBookings()");
     }
@@ -301,15 +302,15 @@ class UI
 
 
 
-        // Get the reservation with the highest ID
-       int lastId = ctx.getBookings().findReservationWithBiggestId() == null ? 0 : ctx.getBookings().findReservationWithBiggestId().getId();
-        Reservation reservation = new Reservation();
 
-        reservation.setShop(shopId);
-        reservation.setInitialDate(initialDate);
-        reservation.setFinalDate(finalDate);
-        reservation.setPrice(BigDecimal.valueOf(value));
-        reservation.setBicycleCode(bicycleId);
+        Reservation reservation = new Reservation();
+        Shop shop = ctx.getShops().findShopByKey(shopId);
+
+        reservation.setLoja(shop); // shopId
+        reservation.setDtinicio(initialDate);
+        reservation.setDtfim(finalDate);
+        reservation.setValor(BigDecimal.valueOf(value));
+        reservation.setNoreserva(bicycleId);
 
         ctx.getBookings().createReservation(reservation,clientId);
 
