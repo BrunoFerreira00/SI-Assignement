@@ -35,7 +35,6 @@ public class EletricBicycle implements IEletricBicycle {
 
 
 
-
     public Integer getAutonomy() {
         return autonomy;
     }

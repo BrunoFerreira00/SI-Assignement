@@ -24,7 +24,7 @@ SOFTWARE.
 package isel.sisinf.model;
 
 
-public class Core 
+public class Core
 {
     //For Demonstration purpose only
     public static String version(){ return "1.0";}
