@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class GPS {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private String serialNumber;
+   private Integer noserie;
     @Column(nullable = false, precision = 6, scale = 4)
     private Double latitude;
 
@@ -14,19 +14,19 @@ public class GPS {
     private Double longitude;
 
     @Column(nullable = false)
-    private String batteryPercentage;
+    private Integer bateria;
 
     public void GPS() {}
 
-    public void GPS(String serialNumber, Double latitude, Double longitude, String batteryPercentage) {
-        this.serialNumber = serialNumber;
+    public void GPS(Integer noserie, Double latitude, Double longitude, Integer bateria) {
+        this.noserie = noserie;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.batteryPercentage = batteryPercentage;
+        this.bateria = bateria;
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
+    public Integer getNoserie() {
+        return noserie;
     }
 
      public Double getLatitude() {
@@ -37,12 +37,12 @@ public class GPS {
         return longitude;
     }
 
-    public String getBatteryPercentage() {
-        return batteryPercentage;
+    public Integer getBateria() {
+        return bateria;
     }
 
-    public void setSerialNumber(String serialNumber){
-        this.serialNumber = serialNumber;
+    public void setNoserie(Integer noserie){
+        this.noserie = noserie;
     }
 
     public void setLatitude(Double latitude){
@@ -53,7 +53,7 @@ public class GPS {
         this.longitude = longitude;
     }
 
-    public void setBatteryPercentage(String batteryPercentage){
-        this.batteryPercentage = batteryPercentage;
+    public void setBateria(Integer bateria){
+        this.bateria = bateria;
     }
 }
