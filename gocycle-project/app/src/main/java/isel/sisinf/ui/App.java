@@ -375,16 +375,12 @@ class UI
         clientBookingId.setReserva(bookingId);
         clientBookingId.setLoja(shopId);
 
+        ctx.beginTransaction();
+        ctx.getClientBookings().deleteOptmisticLocking(ctx.getClientBookings().findByEmbeddedKey(clientBookingId));
+        ctx.getBookings().deleteOptmisticLocking(ctx.getBookings().findByKey(bookingId));
+        ctx.commit();
+        System.out.println("cancelBooking");
 
-            ctx.beginTransaction();
-            ctx.getClientBookings().deleteOptmisticLocking(ctx.getClientBookings().findByEmbeddedKey(clientBookingId));
-            ctx.commit();
-
-            ctx.beginTransaction();
-            ctx.getBookings().deleteOptmisticLocking(ctx.getBookings().findByKey(bookingId));
-            ctx.commit();
-
-           System.out.println("cancelBookingOptimistic()");
     }
 
     private void testOptimisticLocking() {
