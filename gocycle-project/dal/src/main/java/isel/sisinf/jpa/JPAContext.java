@@ -284,6 +284,16 @@ public class JPAContext implements IContext  {
             return (Reservation) helperDeleteteImpl(entity);
         }
 
+        public ClientBooking deleteOptmisticLocking(ClientBooking entity) {
+            try{
+                _em.lock(entity,LockModeType.OPTIMISTIC);
+                return (ClientBooking) helperDeleteteImpl(entity);
+            } catch (OptimisticLockException e) {
+                System.out.println("Optimistic lock exception occurred. Another transaction may have updated the entity.");
+                return null;
+            }
+        }
+
         @Override
         public Reservation findByKey(Integer key) {
             return _em.find(Reservation.class, key);
@@ -319,14 +329,19 @@ public class JPAContext implements IContext  {
             return (ClientBooking) helperDeleteteImpl(entity);
         }
 
+        public ClientBooking deleteOptmisticLocking(ClientBooking entity) {
+            try{
+                _em.lock(entity,LockModeType.OPTIMISTIC);
+                return (ClientBooking) helperDeleteteImpl(entity);
+            } catch (OptimisticLockException e) {
+                System.out.println("Optimistic lock exception occurred. Another transaction may have updated the entity.");
+                return null;
+            }
+        }
+
         @Override
         public ClientBooking findByEmbeddedKey(ClientReservationId key) {
-            /*ClientReservationId client = new ClientReservationId();
-            client.setCliente(key.getCliente());
-            client.setReserva(key.getReserva());
-            client.setLoja(key.getLoja());
 
-            return _em.find(ClientBooking.class, key);*/
 
             String queryString = "SELECT c FROM clientereserva c WHERE c.id.cliente = :cliente AND c.id.reserva = :reserva AND c.id.loja = :loja";
             TypedQuery<ClientBooking> query = _em.createQuery(queryString, ClientBooking.class);
