@@ -205,7 +205,7 @@ class UI
             System.out.println("Brand: " + b.getMarca());
             System.out.println("Change System: " + b.getMudanca());
             System.out.println("State: " + b.getEstado());
-            System.out.println("GPS: " + b.getGps());
+            System.out.println("GPS: " + b.getGps().getNoserie());
             System.out.println();
         });
         System.out.println("listExistingBikes()");
@@ -315,12 +315,6 @@ class UI
         ctx.getBookings().createReservation(reservation,clientId);
 
         // Create the client-reservation relationship
-        /*ClientBooking clientReservation = new ClientBooking();
-        clientReservation.setClientCode(clientId);
-        clientReservation.setBookingCode(lastId + 1);
-        clientReservation.setShopCode(shopId);
-
-        ctx.getClientBookings().create(clientReservation);*/
 
 
         System.out.println("Reservation created successfully!");

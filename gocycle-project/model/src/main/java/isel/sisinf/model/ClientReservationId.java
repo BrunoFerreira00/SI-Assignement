@@ -8,8 +8,12 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class ClientReservationId implements Serializable {
+    @Column(name = "cliente", insertable = false, updatable = false)
     private Integer cliente;
+
+    @Column(name = "reserva", insertable = false, updatable = false)
     private Integer reserva;
+
     @Column(name = "loja", insertable = false, updatable = false)
     private Integer loja;
 

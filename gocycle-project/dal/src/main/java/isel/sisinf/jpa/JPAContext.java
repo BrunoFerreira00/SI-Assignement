@@ -251,7 +251,7 @@ public class JPAContext implements IContext  {
 
                 // Set the parameter values by position
                 query.setParameter(1,client_id);
-                query.setParameter(2, entity.getLoja());
+                query.setParameter(2, entity.getLoja().getCodigo());
                 query.setParameter(3, entity.getNoreserva());
                 query.setParameter(4, entity.getDtinicio());
                 query.setParameter(5, entity.getDtfim());
@@ -321,7 +321,21 @@ public class JPAContext implements IContext  {
 
         @Override
         public ClientBooking findByEmbeddedKey(ClientReservationId key) {
-            return _em.find(ClientBooking.class, key);
+            /*ClientReservationId client = new ClientReservationId();
+            client.setCliente(key.getCliente());
+            client.setReserva(key.getReserva());
+            client.setLoja(key.getLoja());
+
+            return _em.find(ClientBooking.class, key);*/
+
+            String queryString = "SELECT c FROM clientereserva c WHERE c.id.cliente = :cliente AND c.id.reserva = :reserva AND c.id.loja = :loja";
+            TypedQuery<ClientBooking> query = _em.createQuery(queryString, ClientBooking.class);
+            query.setParameter("cliente", key.getCliente());
+            query.setParameter("reserva", key.getReserva());
+            query.setParameter("loja", key.getLoja());
+            ClientBooking booking = query.getSingleResult();
+            return booking;
+
         }
 
         @Override

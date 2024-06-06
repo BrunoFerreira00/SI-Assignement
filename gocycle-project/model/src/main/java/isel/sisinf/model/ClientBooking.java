@@ -9,12 +9,10 @@ public class ClientBooking {
     private ClientReservationId id;
 
     @ManyToOne
-    @MapsId("cliente")
     @JoinColumn(name = "cliente", nullable = false)
     private Client cliente;
 
     @ManyToOne
-    @MapsId("reserva")
     @JoinColumns({
             @JoinColumn(name = "reserva", referencedColumnName = "noreserva"),
             @JoinColumn(name = "loja", referencedColumnName = "loja")
