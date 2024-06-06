@@ -247,11 +247,11 @@ class UI
             System.out.println("No bookings available"  );
         ctx.getBookings().find("SELECT r FROM reserva r").forEach (r ->{
             System.out.println("Número de reserva: " + r.getNoreserva());
-            System.out.println("Loja: " + r.getLoja());
+            System.out.println("Loja: " + r.getLoja().getCodigo());
             System.out.println("Data de ínicio: " + r.getDtinicio());
             System.out.println("Data final: " + r.getDtfim());
             System.out.println("Valor: " + r.getValor());
-            System.out.println("Bicicleta: " + r.getBicicleta());
+            System.out.println("Bicicleta: " + r.getBicicleta().getId_bicicleta());
         });
         System.out.println("obtainBookings()");
     }
