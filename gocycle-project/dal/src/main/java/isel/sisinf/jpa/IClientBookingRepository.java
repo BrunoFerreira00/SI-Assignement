@@ -9,5 +9,7 @@ import java.util.Collection;
 
 public interface IClientBookingRepository extends IRepository<ClientBooking, Collection<ClientBooking>,Integer>,IClientBookingMapper{
 
-     ClientBooking findByEmbeddedKey(ClientReservationId key);
+    ClientBooking deleteOptmisticLocking(ClientBooking entity);
+
+    ClientBooking findByEmbeddedKey(ClientReservationId key);
 }

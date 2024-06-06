@@ -242,14 +242,7 @@ public class JPAContext implements IContext  {
 
                 _em.getTransaction().begin();
                 Query query = _em.createNativeQuery("call MakeReservation(?1,?2,?3,?4,?5,?6)");
-                // Register the parameters with their positions and types
-                /*query.registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN);
-                query.registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN);
-                query.registerStoredProcedureParameter(3, Timestamp.class, ParameterMode.IN);
-                query.registerStoredProcedureParameter(4, Timestamp.class, ParameterMode.IN);
-                query.registerStoredProcedureParameter(5, Double.class, ParameterMode.IN);*/
 
-                // Set the parameter values by position
                 query.setParameter(1,client_id);
                 query.setParameter(2, entity.getLoja().getCodigo());
                 query.setParameter(3, entity.getNoreserva());
@@ -283,11 +276,11 @@ public class JPAContext implements IContext  {
         public Reservation delete(Reservation entity) {
             return (Reservation) helperDeleteteImpl(entity);
         }
-
-        public ClientBooking deleteOptmisticLocking(ClientBooking entity) {
+        @Override
+        public Reservation deleteOptmisticLocking(Reservation entity) {
             try{
                 _em.lock(entity,LockModeType.OPTIMISTIC);
-                return (ClientBooking) helperDeleteteImpl(entity);
+                return (Reservation) helperDeleteteImpl(entity);
             } catch (OptimisticLockException e) {
                 System.out.println("Optimistic lock exception occurred. Another transaction may have updated the entity.");
                 return null;
@@ -328,7 +321,7 @@ public class JPAContext implements IContext  {
         public ClientBooking delete(ClientBooking entity) {
             return (ClientBooking) helperDeleteteImpl(entity);
         }
-
+        @Override
         public ClientBooking deleteOptmisticLocking(ClientBooking entity) {
             try{
                 _em.lock(entity,LockModeType.OPTIMISTIC);

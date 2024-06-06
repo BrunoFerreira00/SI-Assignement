@@ -69,6 +69,7 @@ CREATE TABLE RESERVA (
     dtfim TIMESTAMP CHECK (dtfim > dtinicio),
     valor NUMERIC(5,2),
     bicicleta INTEGER,
+    version INTEGER,
     PRIMARY KEY (noreserva, loja),
     FOREIGN KEY (loja) REFERENCES LOJA(codigo),
     FOREIGN KEY (bicicleta) REFERENCES BICICLETA(id_bicicleta)
@@ -79,6 +80,7 @@ create table CLIENTERESERVA (
     cliente INTEGER,
     reserva INTEGER,
     loja INTEGER,
+    version INTEGER,
     PRIMARY KEY (cliente, reserva, loja),
     FOREIGN KEY (cliente) REFERENCES PESSOA(id),
     FOREIGN KEY (reserva, loja) REFERENCES RESERVA(noreserva, loja)

@@ -51,6 +51,7 @@ class UI
         obtainBookings,
         makeBooking,
         cancelBooking,
+        cancelBookingOptimistic,
         about
     }
     private static UI __instance = null;
@@ -67,6 +68,7 @@ class UI
         __dbMethods.put(Option.obtainBookings, new DbWorker() {public void doWork() {UI.this.obtainBookings();}});
         __dbMethods.put(Option.makeBooking, new DbWorker() {public void doWork() {UI.this.makeBooking();}});
         __dbMethods.put(Option.cancelBooking, new DbWorker() {public void doWork() {UI.this.cancelBooking();}});
+        __dbMethods.put(Option.cancelBookingOptimistic, new DbWorker() {public void doWork() {UI.this.cancelBookingOptimistic();}});
         __dbMethods.put(Option.about, new DbWorker() {public void doWork() {UI.this.about();}});
 
     }
@@ -97,7 +99,8 @@ class UI
             System.out.println("5. Current Bookings");
             System.out.println("6. Make a booking");
             System.out.println("7. Cancel Booking");
-            System.out.println("8. About");
+            System.out.println("8. Cancel Booking Optimistic");
+            System.out.println("9. About");
             System.out.print(">");
             int result = s.nextInt();
             option = Option.values()[result];
@@ -349,6 +352,36 @@ class UI
         ctx.commit();
         System.out.println("cancelBooking");
         
+    }
+
+    private void cancelBookingOptimistic()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter booking id: ");
+        int bookingId = scanner.nextInt();
+
+        System.out.print("Enter client id: ");
+        int clientId = scanner.nextInt();
+
+        System.out.print("Enter shop id: ");
+        int shopId = scanner.nextInt();
+
+        ClientReservationId clientBookingId = new ClientReservationId();
+        clientBookingId.setCliente(clientId);
+        clientBookingId.setReserva(bookingId);
+        clientBookingId.setLoja(shopId);
+
+        ctx.beginTransaction();
+        ctx.getClientBookings().deleteOptmisticLocking(ctx.getClientBookings().findByEmbeddedKey(clientBookingId));
+        ctx.commit();
+
+
+
+        ctx.beginTransaction();
+        ctx.getBookings().deleteOptmisticLocking(ctx.getBookings().findByKey(bookingId));
+        ctx.commit();
+        System.out.println("cancelBooking");
+
     }
 
 

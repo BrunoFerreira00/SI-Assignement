@@ -32,9 +32,13 @@ public class Reservation {
     @OneToMany(mappedBy = "reserva")
     private List<ClientBooking> clientes;
 
-    public void Reservation() {}
+    @Version
+    @Column(name = "version")
+    private Integer version = 0;
 
-    public void Reservation(Integer noreserva, Shop loja, Timestamp dtinicio, Timestamp dtfim, BigDecimal valor, Bicycle bicicleta, List<ClientBooking> clientes) {
+    public  Reservation() {}
+
+    public  Reservation(Integer noreserva, Shop loja, Timestamp dtinicio, Timestamp dtfim, BigDecimal valor, Bicycle bicicleta, List<ClientBooking> clientes) {
         this.noreserva = noreserva;
         this.loja = loja;
         this.dtinicio = dtinicio;
@@ -98,5 +102,13 @@ public class Reservation {
 
     public void setClientes(List<ClientBooking> clientes) {
         this.clientes = clientes;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

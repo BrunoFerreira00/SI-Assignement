@@ -19,6 +19,10 @@ public class ClientBooking {
     })
     private Reservation reserva;
 
+    @Version
+    @Column(name = "version")
+    private Integer version = 0;
+
 
     public ClientReservationId getId() {
         return id;
@@ -42,5 +46,13 @@ public class ClientBooking {
 
     public void setReserva(Reservation reserva) {
         this.reserva = reserva;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }
