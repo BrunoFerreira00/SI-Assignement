@@ -52,6 +52,7 @@ class UI
         makeBooking,
         cancelBooking,
         cancelBookingOptimistic,
+        testOptimisticLocking,
         about
     }
     private static UI __instance = null;
@@ -69,6 +70,8 @@ class UI
         __dbMethods.put(Option.makeBooking, new DbWorker() {public void doWork() {UI.this.makeBooking();}});
         __dbMethods.put(Option.cancelBooking, new DbWorker() {public void doWork() {UI.this.cancelBooking();}});
         __dbMethods.put(Option.cancelBookingOptimistic, new DbWorker() {public void doWork() {UI.this.cancelBookingOptimistic();}});
+        __dbMethods.put(Option.testOptimisticLocking, new DbWorker() {public void doWork() {UI.this.testOptimisticLocking();}});
+
         __dbMethods.put(Option.about, new DbWorker() {public void doWork() {UI.this.about();}});
 
     }
@@ -100,7 +103,8 @@ class UI
             System.out.println("6. Make a booking");
             System.out.println("7. Cancel Booking");
             System.out.println("8. Cancel Booking Optimistic");
-            System.out.println("9. About");
+            System.out.println("9. Test optimistic Lock");
+            System.out.println("10. About");
             System.out.print(">");
             int result = s.nextInt();
             option = Option.values()[result];
@@ -371,19 +375,54 @@ class UI
         clientBookingId.setReserva(bookingId);
         clientBookingId.setLoja(shopId);
 
-        ctx.beginTransaction();
-        ctx.getClientBookings().deleteOptmisticLocking(ctx.getClientBookings().findByEmbeddedKey(clientBookingId));
-       // ctx.commit();
 
+            ctx.beginTransaction();
+            ctx.getClientBookings().deleteOptmisticLocking(ctx.getClientBookings().findByEmbeddedKey(clientBookingId));
+            ctx.commit();
 
+            ctx.beginTransaction();
+            ctx.getBookings().deleteOptmisticLocking(ctx.getBookings().findByKey(bookingId));
+            ctx.commit();
 
-        //ctx.beginTransaction();
-        ctx.getBookings().deleteOptmisticLocking(ctx.getBookings().findByKey(bookingId));
-        ctx.commit();
-        System.out.println("cancelBooking");
-
+           System.out.println("cancelBookingOptimistic()");
     }
 
+    private void testOptimisticLocking() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter booking id to test optimisticLock");
+        int bookingID = scanner.nextInt();
+        System.out.println("Enter client id to test optimisticLock");
+        int clientID = scanner.nextInt();
+        System.out.println("Enter shop id to test optimisticLock");
+        int shopID = scanner.nextInt();
+        ClientReservationId clientBookingId = new ClientReservationId();
+        clientBookingId.setCliente(clientID);
+        clientBookingId.setReserva(bookingID);
+        clientBookingId.setLoja(shopID);
+
+        try {
+            ctx.beginTransaction();
+            Reservation booking1 = ctx.getBookings().findByKey(bookingID);
+            booking1.setValor(BigDecimal.valueOf(1000));
+            ctx.commit();
+
+            ctx.beginTransaction();
+            Reservation booking2 = ctx.getBookings().findByKey(bookingID);
+
+            ctx.getClientBookings().deleteOptmisticLocking(ctx.getClientBookings().findByEmbeddedKey(clientBookingId));
+            ctx.commit();
+
+            ctx.beginTransaction();
+            ctx.getBookings().deleteOptmisticLocking(booking2);
+            ctx.commit();
+
+            System.out.println("Optimistic lock success");
+        } catch (Exception e) {
+            ctx.rollback();
+            System.out.println("Optimistic lock failed");
+        }
+        System.out.println("testOptimisticLocking()");
+    }
 
     private void about()
     {

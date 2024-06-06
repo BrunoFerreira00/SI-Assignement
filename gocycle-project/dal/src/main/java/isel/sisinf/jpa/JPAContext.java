@@ -114,6 +114,13 @@ public class JPAContext implements IContext  {
     }
 
     @Override
+    public void rollback() {
+        if(_tx != null)
+            _tx.rollback();
+        _tx = null;
+    }
+
+    @Override
     public void persist(Object entity) {
         _em.persist(entity);
 
