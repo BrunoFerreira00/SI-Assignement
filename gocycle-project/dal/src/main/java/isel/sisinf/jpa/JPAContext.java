@@ -241,7 +241,7 @@ public class JPAContext implements IContext  {
 
 
                 _em.getTransaction().begin();
-                Query query = _em.createNativeQuery("call MakeReservation(?1,?2,?3,?4,?5,?6)");
+                Query query = _em.createNativeQuery("call MakeReservation(?1,?2,?3,?4,?5,?6, ?7)");
 
                 query.setParameter(1,client_id);
                 query.setParameter(2, entity.getLoja().getCodigo());
@@ -249,6 +249,7 @@ public class JPAContext implements IContext  {
                 query.setParameter(4, entity.getDtinicio());
                 query.setParameter(5, entity.getDtfim());
                 query.setParameter(6, entity.getValor());
+                query.setParameter(7, 0);
 
                 // Execute the stored procedure
                 query.executeUpdate();

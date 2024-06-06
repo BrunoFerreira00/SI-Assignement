@@ -373,11 +373,11 @@ class UI
 
         ctx.beginTransaction();
         ctx.getClientBookings().deleteOptmisticLocking(ctx.getClientBookings().findByEmbeddedKey(clientBookingId));
-        ctx.commit();
+       // ctx.commit();
 
 
 
-        ctx.beginTransaction();
+        //ctx.beginTransaction();
         ctx.getBookings().deleteOptmisticLocking(ctx.getBookings().findByKey(bookingId));
         ctx.commit();
         System.out.println("cancelBooking");
